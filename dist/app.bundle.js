@@ -9,6 +9,16 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./assets/js/script.js":
+/*!*****************************!*
+  !*** ./assets/js/script.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("/* provided dependency */ var $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n__webpack_require__(/*! bootstrap */ \"./node_modules/bootstrap/dist/js/bootstrap.js\");\nconst img1 = __webpack_require__(/*! ../../assets/img/food-table.jpg */ \"./assets/img/food-table.jpg\");\nconst img2 = __webpack_require__(/*! ../../assets/img/grill.jpg */ \"./assets/img/grill.jpg\");\n\n$(document).ready(function() {\n  // First image is hard coded in index.html\n  const carouselSlides = [\n    {\n      title: \"We travel all over the US\",\n      subtitle: \"Check out our schedule!\",\n      img: img1,\n      btnText: \"View Schedule\",\n      btnUrl: \"schedule.html\"\n    },\n    {\n      title: \"Our food is seriously the bomb!\",\n      subtitle: \"What are you waiting for?\",\n      img: img2,\n      btnText: \"Purchase Tickets\",\n      btnUrl: \"tickets.html\"\n    },\n  ]\n\n  carouselSlides.forEach((slide, i) => {\n    $('.carousel-inner').append(`\n  <div class=\"carousel-item fullscreen-carousel\" style=\"background-image: url('${slide.img}')\">\n    <div class=\"d-flex h-100 align-items-center justify-content-center carousel-caption\">\n        <div class=\"container\">\n          <div class=\"row align-items-center justify-content-center\">\n              <h2 class=\"display-4 mb-2\">${slide.title}</h2>\n          </div>\n          <div class=\"row align-items-center justify-content-center\"> \n            <h3>${slide.subtitle}</h3>\n          </div>\n          <div class=\" mt-4 row align-items-center justify-content-center\"> \n            <a class=\"btn btn-primary\" href=\"${slide.btnUrl}\">\n                ${slide.btnText}\n            </a>\n          </div>\n        </div>\n    </div>\n  </div>`)\n  })\n});\n\n//# sourceURL=webpack://food-festival/./assets/js/script.js?");
+
+/***/ }),
+
 /***/ "./node_modules/bootstrap/dist/js/bootstrap.js":
 /*!*****************************************************!*
   !*** ./node_modules/bootstrap/dist/js/bootstrap.js ***!
@@ -60,6 +70,96 @@ eval("var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!\n * jQ
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/**!\n * @fileOverview Kickass library to create and place poppers near their reference elements.\n * @version 1.16.1\n * @license\n * Copyright (c) 2016 Federico Zivolo and contributors\n *\n * Permission is hereby granted, free of charge, to any person obtaining a copy\n * of this software and associated documentation files (the \"Software\"), to deal\n * in the Software without restriction, including without limitation the rights\n * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell\n * copies of the Software, and to permit persons to whom the Software is\n * furnished to do so, subject to the following conditions:\n *\n * The above copyright notice and this permission notice shall be included in all\n * copies or substantial portions of the Software.\n *\n * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\n * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\n * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\n * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\n * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\n * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\n * SOFTWARE.\n */\nvar isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined' && typeof navigator !== 'undefined';\n\nvar timeoutDuration = function () {\n  var longerTimeoutBrowsers = ['Edge', 'Trident', 'Firefox'];\n  for (var i = 0; i < longerTimeoutBrowsers.length; i += 1) {\n    if (isBrowser && navigator.userAgent.indexOf(longerTimeoutBrowsers[i]) >= 0) {\n      return 1;\n    }\n  }\n  return 0;\n}();\n\nfunction microtaskDebounce(fn) {\n  var called = false;\n  return function () {\n    if (called) {\n      return;\n    }\n    called = true;\n    window.Promise.resolve().then(function () {\n      called = false;\n      fn();\n    });\n  };\n}\n\nfunction taskDebounce(fn) {\n  var scheduled = false;\n  return function () {\n    if (!scheduled) {\n      scheduled = true;\n      setTimeout(function () {\n        scheduled = false;\n        fn();\n      }, timeoutDuration);\n    }\n  };\n}\n\nvar supportsMicroTasks = isBrowser && window.Promise;\n\n/**\n* Create a debounced version of a method, that's asynchronously deferred\n* but called in the minimum time possible.\n*\n* @method\n* @memberof Popper.Utils\n* @argument {Function} fn\n* @returns {Function}\n*/\nvar debounce = supportsMicroTasks ? microtaskDebounce : taskDebounce;\n\n/**\n * Check if the given variable is a function\n * @method\n * @memberof Popper.Utils\n * @argument {Any} functionToCheck - variable to check\n * @returns {Boolean} answer to: is a function?\n */\nfunction isFunction(functionToCheck) {\n  var getType = {};\n  return functionToCheck && getType.toString.call(functionToCheck) === '[object Function]';\n}\n\n/**\n * Get CSS computed property of the given element\n * @method\n * @memberof Popper.Utils\n * @argument {Eement} element\n * @argument {String} property\n */\nfunction getStyleComputedProperty(element, property) {\n  if (element.nodeType !== 1) {\n    return [];\n  }\n  // NOTE: 1 DOM access here\n  var window = element.ownerDocument.defaultView;\n  var css = window.getComputedStyle(element, null);\n  return property ? css[property] : css;\n}\n\n/**\n * Returns the parentNode or the host of the element\n * @method\n * @memberof Popper.Utils\n * @argument {Element} element\n * @returns {Element} parent\n */\nfunction getParentNode(element) {\n  if (element.nodeName === 'HTML') {\n    return element;\n  }\n  return element.parentNode || element.host;\n}\n\n/**\n * Returns the scrolling parent of the given element\n * @method\n * @memberof Popper.Utils\n * @argument {Element} element\n * @returns {Element} scroll parent\n */\nfunction getScrollParent(element) {\n  // Return body, `getScroll` will take care to get the correct `scrollTop` from it\n  if (!element) {\n    return document.body;\n  }\n\n  switch (element.nodeName) {\n    case 'HTML':\n    case 'BODY':\n      return element.ownerDocument.body;\n    case '#document':\n      return element.body;\n  }\n\n  // Firefox want us to check `-x` and `-y` variations as well\n\n  var _getStyleComputedProp = getStyleComputedProperty(element),\n      overflow = _getStyleComputedProp.overflow,\n      overflowX = _getStyleComputedProp.overflowX,\n      overflowY = _getStyleComputedProp.overflowY;\n\n  if (/(auto|scroll|overlay)/.test(overflow + overflowY + overflowX)) {\n    return element;\n  }\n\n  return getScrollParent(getParentNode(element));\n}\n\n/**\n * Returns the reference node of the reference object, or the reference object itself.\n * @method\n * @memberof Popper.Utils\n * @param {Element|Object} reference - the reference element (the popper will be relative to this)\n * @returns {Element} parent\n */\nfunction getReferenceNode(reference) {\n  return reference && reference.referenceNode ? reference.referenceNode : reference;\n}\n\nvar isIE11 = isBrowser && !!(window.MSInputMethodContext && document.documentMode);\nvar isIE10 = isBrowser && /MSIE 10/.test(navigator.userAgent);\n\n/**\n * Determines if the browser is Internet Explorer\n * @method\n * @memberof Popper.Utils\n * @param {Number} version to check\n * @returns {Boolean} isIE\n */\nfunction isIE(version) {\n  if (version === 11) {\n    return isIE11;\n  }\n  if (version === 10) {\n    return isIE10;\n  }\n  return isIE11 || isIE10;\n}\n\n/**\n * Returns the offset parent of the given element\n * @method\n * @memberof Popper.Utils\n * @argument {Element} element\n * @returns {Element} offset parent\n */\nfunction getOffsetParent(element) {\n  if (!element) {\n    return document.documentElement;\n  }\n\n  var noOffsetParent = isIE(10) ? document.body : null;\n\n  // NOTE: 1 DOM access here\n  var offsetParent = element.offsetParent || null;\n  // Skip hidden elements which don't have an offsetParent\n  while (offsetParent === noOffsetParent && element.nextElementSibling) {\n    offsetParent = (element = element.nextElementSibling).offsetParent;\n  }\n\n  var nodeName = offsetParent && offsetParent.nodeName;\n\n  if (!nodeName || nodeName === 'BODY' || nodeName === 'HTML') {\n    return element ? element.ownerDocument.documentElement : document.documentElement;\n  }\n\n  // .offsetParent will return the closest TH, TD or TABLE in case\n  // no offsetParent is present, I hate this job...\n  if (['TH', 'TD', 'TABLE'].indexOf(offsetParent.nodeName) !== -1 && getStyleComputedProperty(offsetParent, 'position') === 'static') {\n    return getOffsetParent(offsetParent);\n  }\n\n  return offsetParent;\n}\n\nfunction isOffsetContainer(element) {\n  var nodeName = element.nodeName;\n\n  if (nodeName === 'BODY') {\n    return false;\n  }\n  return nodeName === 'HTML' || getOffsetParent(element.firstElementChild) === element;\n}\n\n/**\n * Finds the root node (document, shadowDOM root) of the given element\n * @method\n * @memberof Popper.Utils\n * @argument {Element} node\n * @returns {Element} root node\n */\nfunction getRoot(node) {\n  if (node.parentNode !== null) {\n    return getRoot(node.parentNode);\n  }\n\n  return node;\n}\n\n/**\n * Finds the offset parent common to the two provided nodes\n * @method\n * @memberof Popper.Utils\n * @argument {Element} element1\n * @argument {Element} element2\n * @returns {Element} common offset parent\n */\nfunction findCommonOffsetParent(element1, element2) {\n  // This check is needed to avoid errors in case one of the elements isn't defined for any reason\n  if (!element1 || !element1.nodeType || !element2 || !element2.nodeType) {\n    return document.documentElement;\n  }\n\n  // Here we make sure to give as \"start\" the element that comes first in the DOM\n  var order = element1.compareDocumentPosition(element2) & Node.DOCUMENT_POSITION_FOLLOWING;\n  var start = order ? element1 : element2;\n  var end = order ? element2 : element1;\n\n  // Get common ancestor container\n  var range = document.createRange();\n  range.setStart(start, 0);\n  range.setEnd(end, 0);\n  var commonAncestorContainer = range.commonAncestorContainer;\n\n  // Both nodes are inside #document\n\n  if (element1 !== commonAncestorContainer && element2 !== commonAncestorContainer || start.contains(end)) {\n    if (isOffsetContainer(commonAncestorContainer)) {\n      return commonAncestorContainer;\n    }\n\n    return getOffsetParent(commonAncestorContainer);\n  }\n\n  // one of the nodes is inside shadowDOM, find which one\n  var element1root = getRoot(element1);\n  if (element1root.host) {\n    return findCommonOffsetParent(element1root.host, element2);\n  } else {\n    return findCommonOffsetParent(element1, getRoot(element2).host);\n  }\n}\n\n/**\n * Gets the scroll value of the given element in the given side (top and left)\n * @method\n * @memberof Popper.Utils\n * @argument {Element} element\n * @argument {String} side `top` or `left`\n * @returns {number} amount of scrolled pixels\n */\nfunction getScroll(element) {\n  var side = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'top';\n\n  var upperSide = side === 'top' ? 'scrollTop' : 'scrollLeft';\n  var nodeName = element.nodeName;\n\n  if (nodeName === 'BODY' || nodeName === 'HTML') {\n    var html = element.ownerDocument.documentElement;\n    var scrollingElement = element.ownerDocument.scrollingElement || html;\n    return scrollingElement[upperSide];\n  }\n\n  return element[upperSide];\n}\n\n/*\n * Sum or subtract the element scroll values (left and top) from a given rect object\n * @method\n * @memberof Popper.Utils\n * @param {Object} rect - Rect object you want to change\n * @param {HTMLElement} element - The element from the function reads the scroll values\n * @param {Boolean} subtract - set to true if you want to subtract the scroll values\n * @return {Object} rect - The modifier rect object\n */\nfunction includeScroll(rect, element) {\n  var subtract = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;\n\n  var scrollTop = getScroll(element, 'top');\n  var scrollLeft = getScroll(element, 'left');\n  var modifier = subtract ? -1 : 1;\n  rect.top += scrollTop * modifier;\n  rect.bottom += scrollTop * modifier;\n  rect.left += scrollLeft * modifier;\n  rect.right += scrollLeft * modifier;\n  return rect;\n}\n\n/*\n * Helper to detect borders of a given element\n * @method\n * @memberof Popper.Utils\n * @param {CSSStyleDeclaration} styles\n * Result of `getStyleComputedProperty` on the given element\n * @param {String} axis - `x` or `y`\n * @return {number} borders - The borders size of the given axis\n */\n\nfunction getBordersSize(styles, axis) {\n  var sideA = axis === 'x' ? 'Left' : 'Top';\n  var sideB = sideA === 'Left' ? 'Right' : 'Bottom';\n\n  return parseFloat(styles['border' + sideA + 'Width']) + parseFloat(styles['border' + sideB + 'Width']);\n}\n\nfunction getSize(axis, body, html, computedStyle) {\n  return Math.max(body['offset' + axis], body['scroll' + axis], html['client' + axis], html['offset' + axis], html['scroll' + axis], isIE(10) ? parseInt(html['offset' + axis]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Top' : 'Left')]) + parseInt(computedStyle['margin' + (axis === 'Height' ? 'Bottom' : 'Right')]) : 0);\n}\n\nfunction getWindowSizes(document) {\n  var body = document.body;\n  var html = document.documentElement;\n  var computedStyle = isIE(10) && getComputedStyle(html);\n\n  return {\n    height: getSize('Height', body, html, computedStyle),\n    width: getSize('Width', body, html, computedStyle)\n  };\n}\n\nvar classCallCheck = function (instance, Constructor) {\n  if (!(instance instanceof Constructor)) {\n    throw new TypeError(\"Cannot call a class as a function\");\n  }\n};\n\nvar createClass = function () {\n  function defineProperties(target, props) {\n    for (var i = 0; i < props.length; i++) {\n      var descriptor = props[i];\n      descriptor.enumerable = descriptor.enumerable || false;\n      descriptor.configurable = true;\n      if (\"value\" in descriptor) descriptor.writable = true;\n      Object.defineProperty(target, descriptor.key, descriptor);\n    }\n  }\n\n  return function (Constructor, protoProps, staticProps) {\n    if (protoProps) defineProperties(Constructor.prototype, protoProps);\n    if (staticProps) defineProperties(Constructor, staticProps);\n    return Constructor;\n  };\n}();\n\n\n\n\n\nvar defineProperty = function (obj, key, value) {\n  if (key in obj) {\n    Object.defineProperty(obj, key, {\n      value: value,\n      enumerable: true,\n      configurable: true,\n      writable: true\n    });\n  } else {\n    obj[key] = value;\n  }\n\n  return obj;\n};\n\nvar _extends = Object.assign || function (target) {\n  for (var i = 1; i < arguments.length; i++) {\n    var source = arguments[i];\n\n    for (var key in source) {\n      if (Object.prototype.hasOwnProperty.call(source, key)) {\n        target[key] = source[key];\n      }\n    }\n  }\n\n  return target;\n};\n\n/**\n * Given element offsets, generate an output similar to getBoundingClientRect\n * @method\n * @memberof Popper.Utils\n * @argument {Object} offsets\n * @returns {Object} ClientRect like output\n */\nfunction getClientRect(offsets) {\n  return _extends({}, offsets, {\n    right: offsets.left + offsets.width,\n    bottom: offsets.top + offsets.height\n  });\n}\n\n/**\n * Get bounding client rect of given element\n * @method\n * @memberof Popper.Utils\n * @param {HTMLElement} element\n * @return {Object} client rect\n */\nfunction getBoundingClientRect(element) {\n  var rect = {};\n\n  // IE10 10 FIX: Please, don't ask, the element isn't\n  // considered in DOM in some circumstances...\n  // This isn't reproducible in IE10 compatibility mode of IE11\n  try {\n    if (isIE(10)) {\n      rect = element.getBoundingClientRect();\n      var scrollTop = getScroll(element, 'top');\n      var scrollLeft = getScroll(element, 'left');\n      rect.top += scrollTop;\n      rect.left += scrollLeft;\n      rect.bottom += scrollTop;\n      rect.right += scrollLeft;\n    } else {\n      rect = element.getBoundingClientRect();\n    }\n  } catch (e) {}\n\n  var result = {\n    left: rect.left,\n    top: rect.top,\n    width: rect.right - rect.left,\n    height: rect.bottom - rect.top\n  };\n\n  // subtract scrollbar size from sizes\n  var sizes = element.nodeName === 'HTML' ? getWindowSizes(element.ownerDocument) : {};\n  var width = sizes.width || element.clientWidth || result.width;\n  var height = sizes.height || element.clientHeight || result.height;\n\n  var horizScrollbar = element.offsetWidth - width;\n  var vertScrollbar = element.offsetHeight - height;\n\n  // if an hypothetical scrollbar is detected, we must be sure it's not a `border`\n  // we make this check conditional for performance reasons\n  if (horizScrollbar || vertScrollbar) {\n    var styles = getStyleComputedProperty(element);\n    horizScrollbar -= getBordersSize(styles, 'x');\n    vertScrollbar -= getBordersSize(styles, 'y');\n\n    result.width -= horizScrollbar;\n    result.height -= vertScrollbar;\n  }\n\n  return getClientRect(result);\n}\n\nfunction getOffsetRectRelativeToArbitraryNode(children, parent) {\n  var fixedPosition = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;\n\n  var isIE10 = isIE(10);\n  var isHTML = parent.nodeName === 'HTML';\n  var childrenRect = getBoundingClientRect(children);\n  var parentRect = getBoundingClientRect(parent);\n  var scrollParent = getScrollParent(children);\n\n  var styles = getStyleComputedProperty(parent);\n  var borderTopWidth = parseFloat(styles.borderTopWidth);\n  var borderLeftWidth = parseFloat(styles.borderLeftWidth);\n\n  // In cases where the parent is fixed, we must ignore negative scroll in offset calc\n  if (fixedPosition && isHTML) {\n    parentRect.top = Math.max(parentRect.top, 0);\n    parentRect.left = Math.max(parentRect.left, 0);\n  }\n  var offsets = getClientRect({\n    top: childrenRect.top - parentRect.top - borderTopWidth,\n    left: childrenRect.left - parentRect.left - borderLeftWidth,\n    width: childrenRect.width,\n    height: childrenRect.height\n  });\n  offsets.marginTop = 0;\n  offsets.marginLeft = 0;\n\n  // Subtract margins of documentElement in case it's being used as parent\n  // we do this only on HTML because it's the only element that behaves\n  // differently when margins are applied to it. The margins are included in\n  // the box of the documentElement, in the other cases not.\n  if (!isIE10 && isHTML) {\n    var marginTop = parseFloat(styles.marginTop);\n    var marginLeft = parseFloat(styles.marginLeft);\n\n    offsets.top -= borderTopWidth - marginTop;\n    offsets.bottom -= borderTopWidth - marginTop;\n    offsets.left -= borderLeftWidth - marginLeft;\n    offsets.right -= borderLeftWidth - marginLeft;\n\n    // Attach marginTop and marginLeft because in some circumstances we may need them\n    offsets.marginTop = marginTop;\n    offsets.marginLeft = marginLeft;\n  }\n\n  if (isIE10 && !fixedPosition ? parent.contains(scrollParent) : parent === scrollParent && scrollParent.nodeName !== 'BODY') {\n    offsets = includeScroll(offsets, parent);\n  }\n\n  return offsets;\n}\n\nfunction getViewportOffsetRectRelativeToArtbitraryNode(element) {\n  var excludeScroll = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;\n\n  var html = element.ownerDocument.documentElement;\n  var relativeOffset = getOffsetRectRelativeToArbitraryNode(element, html);\n  var width = Math.max(html.clientWidth, window.innerWidth || 0);\n  var height = Math.max(html.clientHeight, window.innerHeight || 0);\n\n  var scrollTop = !excludeScroll ? getScroll(html) : 0;\n  var scrollLeft = !excludeScroll ? getScroll(html, 'left') : 0;\n\n  var offset = {\n    top: scrollTop - relativeOffset.top + relativeOffset.marginTop,\n    left: scrollLeft - relativeOffset.left + relativeOffset.marginLeft,\n    width: width,\n    height: height\n  };\n\n  return getClientRect(offset);\n}\n\n/**\n * Check if the given element is fixed or is inside a fixed parent\n * @method\n * @memberof Popper.Utils\n * @argument {Element} element\n * @argument {Element} customContainer\n * @returns {Boolean} answer to \"isFixed?\"\n */\nfunction isFixed(element) {\n  var nodeName = element.nodeName;\n  if (nodeName === 'BODY' || nodeName === 'HTML') {\n    return false;\n  }\n  if (getStyleComputedProperty(element, 'position') === 'fixed') {\n    return true;\n  }\n  var parentNode = getParentNode(element);\n  if (!parentNode) {\n    return false;\n  }\n  return isFixed(parentNode);\n}\n\n/**\n * Finds the first parent of an element that has a transformed property defined\n * @method\n * @memberof Popper.Utils\n * @argument {Element} element\n * @returns {Element} first transformed parent or documentElement\n */\n\nfunction getFixedPositionOffsetParent(element) {\n  // This check is needed to avoid errors in case one of the elements isn't defined for any reason\n  if (!element || !element.parentElement || isIE()) {\n    return document.documentElement;\n  }\n  var el = element.parentElement;\n  while (el && getStyleComputedProperty(el, 'transform') === 'none') {\n    el = el.parentElement;\n  }\n  return el || document.documentElement;\n}\n\n/**\n * Computed the boundaries limits and return them\n * @method\n * @memberof Popper.Utils\n * @param {HTMLElement} popper\n * @param {HTMLElement} reference\n * @param {number} padding\n * @param {HTMLElement} boundariesElement - Element used to define the boundaries\n * @param {Boolean} fixedPosition - Is in fixed position mode\n * @returns {Object} Coordinates of the boundaries\n */\nfunction getBoundaries(popper, reference, padding, boundariesElement) {\n  var fixedPosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;\n\n  // NOTE: 1 DOM access here\n\n  var boundaries = { top: 0, left: 0 };\n  var offsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, getReferenceNode(reference));\n\n  // Handle viewport case\n  if (boundariesElement === 'viewport') {\n    boundaries = getViewportOffsetRectRelativeToArtbitraryNode(offsetParent, fixedPosition);\n  } else {\n    // Handle other cases based on DOM element used as boundaries\n    var boundariesNode = void 0;\n    if (boundariesElement === 'scrollParent') {\n      boundariesNode = getScrollParent(getParentNode(reference));\n      if (boundariesNode.nodeName === 'BODY') {\n        boundariesNode = popper.ownerDocument.documentElement;\n      }\n    } else if (boundariesElement === 'window') {\n      boundariesNode = popper.ownerDocument.documentElement;\n    } else {\n      boundariesNode = boundariesElement;\n    }\n\n    var offsets = getOffsetRectRelativeToArbitraryNode(boundariesNode, offsetParent, fixedPosition);\n\n    // In case of HTML, we need a different computation\n    if (boundariesNode.nodeName === 'HTML' && !isFixed(offsetParent)) {\n      var _getWindowSizes = getWindowSizes(popper.ownerDocument),\n          height = _getWindowSizes.height,\n          width = _getWindowSizes.width;\n\n      boundaries.top += offsets.top - offsets.marginTop;\n      boundaries.bottom = height + offsets.top;\n      boundaries.left += offsets.left - offsets.marginLeft;\n      boundaries.right = width + offsets.left;\n    } else {\n      // for all the other DOM elements, this one is good\n      boundaries = offsets;\n    }\n  }\n\n  // Add paddings\n  padding = padding || 0;\n  var isPaddingNumber = typeof padding === 'number';\n  boundaries.left += isPaddingNumber ? padding : padding.left || 0;\n  boundaries.top += isPaddingNumber ? padding : padding.top || 0;\n  boundaries.right -= isPaddingNumber ? padding : padding.right || 0;\n  boundaries.bottom -= isPaddingNumber ? padding : padding.bottom || 0;\n\n  return boundaries;\n}\n\nfunction getArea(_ref) {\n  var width = _ref.width,\n      height = _ref.height;\n\n  return width * height;\n}\n\n/**\n * Utility used to transform the `auto` placement to the placement with more\n * available space.\n * @method\n * @memberof Popper.Utils\n * @argument {Object} data - The data object generated by update method\n * @argument {Object} options - Modifiers configuration and options\n * @returns {Object} The data object, properly modified\n */\nfunction computeAutoPlacement(placement, refRect, popper, reference, boundariesElement) {\n  var padding = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;\n\n  if (placement.indexOf('auto') === -1) {\n    return placement;\n  }\n\n  var boundaries = getBoundaries(popper, reference, padding, boundariesElement);\n\n  var rects = {\n    top: {\n      width: boundaries.width,\n      height: refRect.top - boundaries.top\n    },\n    right: {\n      width: boundaries.right - refRect.right,\n      height: boundaries.height\n    },\n    bottom: {\n      width: boundaries.width,\n      height: boundaries.bottom - refRect.bottom\n    },\n    left: {\n      width: refRect.left - boundaries.left,\n      height: boundaries.height\n    }\n  };\n\n  var sortedAreas = Object.keys(rects).map(function (key) {\n    return _extends({\n      key: key\n    }, rects[key], {\n      area: getArea(rects[key])\n    });\n  }).sort(function (a, b) {\n    return b.area - a.area;\n  });\n\n  var filteredAreas = sortedAreas.filter(function (_ref2) {\n    var width = _ref2.width,\n        height = _ref2.height;\n    return width >= popper.clientWidth && height >= popper.clientHeight;\n  });\n\n  var computedPlacement = filteredAreas.length > 0 ? filteredAreas[0].key : sortedAreas[0].key;\n\n  var variation = placement.split('-')[1];\n\n  return computedPlacement + (variation ? '-' + variation : '');\n}\n\n/**\n * Get offsets to the reference element\n * @method\n * @memberof Popper.Utils\n * @param {Object} state\n * @param {Element} popper - the popper element\n * @param {Element} reference - the reference element (the popper will be relative to this)\n * @param {Element} fixedPosition - is in fixed position mode\n * @returns {Object} An object containing the offsets which will be applied to the popper\n */\nfunction getReferenceOffsets(state, popper, reference) {\n  var fixedPosition = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;\n\n  var commonOffsetParent = fixedPosition ? getFixedPositionOffsetParent(popper) : findCommonOffsetParent(popper, getReferenceNode(reference));\n  return getOffsetRectRelativeToArbitraryNode(reference, commonOffsetParent, fixedPosition);\n}\n\n/**\n * Get the outer sizes of the given element (offset size + margins)\n * @method\n * @memberof Popper.Utils\n * @argument {Element} element\n * @returns {Object} object containing width and height properties\n */\nfunction getOuterSizes(element) {\n  var window = element.ownerDocument.defaultView;\n  var styles = window.getComputedStyle(element);\n  var x = parseFloat(styles.marginTop || 0) + parseFloat(styles.marginBottom || 0);\n  var y = parseFloat(styles.marginLeft || 0) + parseFloat(styles.marginRight || 0);\n  var result = {\n    width: element.offsetWidth + y,\n    height: element.offsetHeight + x\n  };\n  return result;\n}\n\n/**\n * Get the opposite placement of the given one\n * @method\n * @memberof Popper.Utils\n * @argument {String} placement\n * @returns {String} flipped placement\n */\nfunction getOppositePlacement(placement) {\n  var hash = { left: 'right', right: 'left', bottom: 'top', top: 'bottom' };\n  return placement.replace(/left|right|bottom|top/g, function (matched) {\n    return hash[matched];\n  });\n}\n\n/**\n * Get offsets to the popper\n * @method\n * @memberof Popper.Utils\n * @param {Object} position - CSS position the Popper will get applied\n * @param {HTMLElement} popper - the popper element\n * @param {Object} referenceOffsets - the reference offsets (the popper will be relative to this)\n * @param {String} placement - one of the valid placement options\n * @returns {Object} popperOffsets - An object containing the offsets which will be applied to the popper\n */\nfunction getPopperOffsets(popper, referenceOffsets, placement) {\n  placement = placement.split('-')[0];\n\n  // Get popper node sizes\n  var popperRect = getOuterSizes(popper);\n\n  // Add position, width and height to our offsets object\n  var popperOffsets = {\n    width: popperRect.width,\n    height: popperRect.height\n  };\n\n  // depending by the popper placement we have to compute its offsets slightly differently\n  var isHoriz = ['right', 'left'].indexOf(placement) !== -1;\n  var mainSide = isHoriz ? 'top' : 'left';\n  var secondarySide = isHoriz ? 'left' : 'top';\n  var measurement = isHoriz ? 'height' : 'width';\n  var secondaryMeasurement = !isHoriz ? 'height' : 'width';\n\n  popperOffsets[mainSide] = referenceOffsets[mainSide] + referenceOffsets[measurement] / 2 - popperRect[measurement] / 2;\n  if (placement === secondarySide) {\n    popperOffsets[secondarySide] = referenceOffsets[secondarySide] - popperRect[secondaryMeasurement];\n  } else {\n    popperOffsets[secondarySide] = referenceOffsets[getOppositePlacement(secondarySide)];\n  }\n\n  return popperOffsets;\n}\n\n/**\n * Mimics the `find` method of Array\n * @method\n * @memberof Popper.Utils\n * @argument {Array} arr\n * @argument prop\n * @argument value\n * @returns index or -1\n */\nfunction find(arr, check) {\n  // use native find if supported\n  if (Array.prototype.find) {\n    return arr.find(check);\n  }\n\n  // use `filter` to obtain the same behavior of `find`\n  return arr.filter(check)[0];\n}\n\n/**\n * Return the index of the matching object\n * @method\n * @memberof Popper.Utils\n * @argument {Array} arr\n * @argument prop\n * @argument value\n * @returns index or -1\n */\nfunction findIndex(arr, prop, value) {\n  // use native findIndex if supported\n  if (Array.prototype.findIndex) {\n    return arr.findIndex(function (cur) {\n      return cur[prop] === value;\n    });\n  }\n\n  // use `find` + `indexOf` if `findIndex` isn't supported\n  var match = find(arr, function (obj) {\n    return obj[prop] === value;\n  });\n  return arr.indexOf(match);\n}\n\n/**\n * Loop trough the list of modifiers and run them in order,\n * each of them will then edit the data object.\n * @method\n * @memberof Popper.Utils\n * @param {dataObject} data\n * @param {Array} modifiers\n * @param {String} ends - Optional modifier name used as stopper\n * @returns {dataObject}\n */\nfunction runModifiers(modifiers, data, ends) {\n  var modifiersToRun = ends === undefined ? modifiers : modifiers.slice(0, findIndex(modifiers, 'name', ends));\n\n  modifiersToRun.forEach(function (modifier) {\n    if (modifier['function']) {\n      // eslint-disable-line dot-notation\n      console.warn('`modifier.function` is deprecated, use `modifier.fn`!');\n    }\n    var fn = modifier['function'] || modifier.fn; // eslint-disable-line dot-notation\n    if (modifier.enabled && isFunction(fn)) {\n      // Add properties to offsets to make them a complete clientRect object\n      // we do this before each modifier to make sure the previous one doesn't\n      // mess with these values\n      data.offsets.popper = getClientRect(data.offsets.popper);\n      data.offsets.reference = getClientRect(data.offsets.reference);\n\n      data = fn(data, modifier);\n    }\n  });\n\n  return data;\n}\n\n/**\n * Updates the position of the popper, computing the new offsets and applying\n * the new style.<br />\n * Prefer `scheduleUpdate` over `update` because of performance reasons.\n * @method\n * @memberof Popper\n */\nfunction update() {\n  // if popper is destroyed, don't perform any further update\n  if (this.state.isDestroyed) {\n    return;\n  }\n\n  var data = {\n    instance: this,\n    styles: {},\n    arrowStyles: {},\n    attributes: {},\n    flipped: false,\n    offsets: {}\n  };\n\n  // compute reference element offsets\n  data.offsets.reference = getReferenceOffsets(this.state, this.popper, this.reference, this.options.positionFixed);\n\n  // compute auto placement, store placement inside the data object,\n  // modifiers will be able to edit `placement` if needed\n  // and refer to originalPlacement to know the original value\n  data.placement = computeAutoPlacement(this.options.placement, data.offsets.reference, this.popper, this.reference, this.options.modifiers.flip.boundariesElement, this.options.modifiers.flip.padding);\n\n  // store the computed placement inside `originalPlacement`\n  data.originalPlacement = data.placement;\n\n  data.positionFixed = this.options.positionFixed;\n\n  // compute the popper offsets\n  data.offsets.popper = getPopperOffsets(this.popper, data.offsets.reference, data.placement);\n\n  data.offsets.popper.position = this.options.positionFixed ? 'fixed' : 'absolute';\n\n  // run the modifiers\n  data = runModifiers(this.modifiers, data);\n\n  // the first `update` will call `onCreate` callback\n  // the other ones will call `onUpdate` callback\n  if (!this.state.isCreated) {\n    this.state.isCreated = true;\n    this.options.onCreate(data);\n  } else {\n    this.options.onUpdate(data);\n  }\n}\n\n/**\n * Helper used to know if the given modifier is enabled.\n * @method\n * @memberof Popper.Utils\n * @returns {Boolean}\n */\nfunction isModifierEnabled(modifiers, modifierName) {\n  return modifiers.some(function (_ref) {\n    var name = _ref.name,\n        enabled = _ref.enabled;\n    return enabled && name === modifierName;\n  });\n}\n\n/**\n * Get the prefixed supported property name\n * @method\n * @memberof Popper.Utils\n * @argument {String} property (camelCase)\n * @returns {String} prefixed property (camelCase or PascalCase, depending on the vendor prefix)\n */\nfunction getSupportedPropertyName(property) {\n  var prefixes = [false, 'ms', 'Webkit', 'Moz', 'O'];\n  var upperProp = property.charAt(0).toUpperCase() + property.slice(1);\n\n  for (var i = 0; i < prefixes.length; i++) {\n    var prefix = prefixes[i];\n    var toCheck = prefix ? '' + prefix + upperProp : property;\n    if (typeof document.body.style[toCheck] !== 'undefined') {\n      return toCheck;\n    }\n  }\n  return null;\n}\n\n/**\n * Destroys the popper.\n * @method\n * @memberof Popper\n */\nfunction destroy() {\n  this.state.isDestroyed = true;\n\n  // touch DOM only if `applyStyle` modifier is enabled\n  if (isModifierEnabled(this.modifiers, 'applyStyle')) {\n    this.popper.removeAttribute('x-placement');\n    this.popper.style.position = '';\n    this.popper.style.top = '';\n    this.popper.style.left = '';\n    this.popper.style.right = '';\n    this.popper.style.bottom = '';\n    this.popper.style.willChange = '';\n    this.popper.style[getSupportedPropertyName('transform')] = '';\n  }\n\n  this.disableEventListeners();\n\n  // remove the popper if user explicitly asked for the deletion on destroy\n  // do not use `remove` because IE11 doesn't support it\n  if (this.options.removeOnDestroy) {\n    this.popper.parentNode.removeChild(this.popper);\n  }\n  return this;\n}\n\n/**\n * Get the window associated with the element\n * @argument {Element} element\n * @returns {Window}\n */\nfunction getWindow(element) {\n  var ownerDocument = element.ownerDocument;\n  return ownerDocument ? ownerDocument.defaultView : window;\n}\n\nfunction attachToScrollParents(scrollParent, event, callback, scrollParents) {\n  var isBody = scrollParent.nodeName === 'BODY';\n  var target = isBody ? scrollParent.ownerDocument.defaultView : scrollParent;\n  target.addEventListener(event, callback, { passive: true });\n\n  if (!isBody) {\n    attachToScrollParents(getScrollParent(target.parentNode), event, callback, scrollParents);\n  }\n  scrollParents.push(target);\n}\n\n/**\n * Setup needed event listeners used to update the popper position\n * @method\n * @memberof Popper.Utils\n * @private\n */\nfunction setupEventListeners(reference, options, state, updateBound) {\n  // Resize event listener on window\n  state.updateBound = updateBound;\n  getWindow(reference).addEventListener('resize', state.updateBound, { passive: true });\n\n  // Scroll event listener on scroll parents\n  var scrollElement = getScrollParent(reference);\n  attachToScrollParents(scrollElement, 'scroll', state.updateBound, state.scrollParents);\n  state.scrollElement = scrollElement;\n  state.eventsEnabled = true;\n\n  return state;\n}\n\n/**\n * It will add resize/scroll events and start recalculating\n * position of the popper element when they are triggered.\n * @method\n * @memberof Popper\n */\nfunction enableEventListeners() {\n  if (!this.state.eventsEnabled) {\n    this.state = setupEventListeners(this.reference, this.options, this.state, this.scheduleUpdate);\n  }\n}\n\n/**\n * Remove event listeners used to update the popper position\n * @method\n * @memberof Popper.Utils\n * @private\n */\nfunction removeEventListeners(reference, state) {\n  // Remove resize event listener on window\n  getWindow(reference).removeEventListener('resize', state.updateBound);\n\n  // Remove scroll event listener on scroll parents\n  state.scrollParents.forEach(function (target) {\n    target.removeEventListener('scroll', state.updateBound);\n  });\n\n  // Reset state\n  state.updateBound = null;\n  state.scrollParents = [];\n  state.scrollElement = null;\n  state.eventsEnabled = false;\n  return state;\n}\n\n/**\n * It will remove resize/scroll events and won't recalculate popper position\n * when they are triggered. It also won't trigger `onUpdate` callback anymore,\n * unless you call `update` method manually.\n * @method\n * @memberof Popper\n */\nfunction disableEventListeners() {\n  if (this.state.eventsEnabled) {\n    cancelAnimationFrame(this.scheduleUpdate);\n    this.state = removeEventListeners(this.reference, this.state);\n  }\n}\n\n/**\n * Tells if a given input is a number\n * @method\n * @memberof Popper.Utils\n * @param {*} input to check\n * @return {Boolean}\n */\nfunction isNumeric(n) {\n  return n !== '' && !isNaN(parseFloat(n)) && isFinite(n);\n}\n\n/**\n * Set the style to the given popper\n * @method\n * @memberof Popper.Utils\n * @argument {Element} element - Element to apply the style to\n * @argument {Object} styles\n * Object with a list of properties and values which will be applied to the element\n */\nfunction setStyles(element, styles) {\n  Object.keys(styles).forEach(function (prop) {\n    var unit = '';\n    // add unit if the value is numeric and is one of the following\n    if (['width', 'height', 'top', 'right', 'bottom', 'left'].indexOf(prop) !== -1 && isNumeric(styles[prop])) {\n      unit = 'px';\n    }\n    element.style[prop] = styles[prop] + unit;\n  });\n}\n\n/**\n * Set the attributes to the given popper\n * @method\n * @memberof Popper.Utils\n * @argument {Element} element - Element to apply the attributes to\n * @argument {Object} styles\n * Object with a list of properties and values which will be applied to the element\n */\nfunction setAttributes(element, attributes) {\n  Object.keys(attributes).forEach(function (prop) {\n    var value = attributes[prop];\n    if (value !== false) {\n      element.setAttribute(prop, attributes[prop]);\n    } else {\n      element.removeAttribute(prop);\n    }\n  });\n}\n\n/**\n * @function\n * @memberof Modifiers\n * @argument {Object} data - The data object generated by `update` method\n * @argument {Object} data.styles - List of style properties - values to apply to popper element\n * @argument {Object} data.attributes - List of attribute properties - values to apply to popper element\n * @argument {Object} options - Modifiers configuration and options\n * @returns {Object} The same data object\n */\nfunction applyStyle(data) {\n  // any property present in `data.styles` will be applied to the popper,\n  // in this way we can make the 3rd party modifiers add custom styles to it\n  // Be aware, modifiers could override the properties defined in the previous\n  // lines of this modifier!\n  setStyles(data.instance.popper, data.styles);\n\n  // any property present in `data.attributes` will be applied to the popper,\n  // they will be set as HTML attributes of the element\n  setAttributes(data.instance.popper, data.attributes);\n\n  // if arrowElement is defined and arrowStyles has some properties\n  if (data.arrowElement && Object.keys(data.arrowStyles).length) {\n    setStyles(data.arrowElement, data.arrowStyles);\n  }\n\n  return data;\n}\n\n/**\n * Set the x-placement attribute before everything else because it could be used\n * to add margins to the popper margins needs to be calculated to get the\n * correct popper offsets.\n * @method\n * @memberof Popper.modifiers\n * @param {HTMLElement} reference - The reference element used to position the popper\n * @param {HTMLElement} popper - The HTML element used as popper\n * @param {Object} options - Popper.js options\n */\nfunction applyStyleOnLoad(reference, popper, options, modifierOptions, state) {\n  // compute reference element offsets\n  var referenceOffsets = getReferenceOffsets(state, popper, reference, options.positionFixed);\n\n  // compute auto placement, store placement inside the data object,\n  // modifiers will be able to edit `placement` if needed\n  // and refer to originalPlacement to know the original value\n  var placement = computeAutoPlacement(options.placement, referenceOffsets, popper, reference, options.modifiers.flip.boundariesElement, options.modifiers.flip.padding);\n\n  popper.setAttribute('x-placement', placement);\n\n  // Apply `position` to popper before anything else because\n  // without the position applied we can't guarantee correct computations\n  setStyles(popper, { position: options.positionFixed ? 'fixed' : 'absolute' });\n\n  return options;\n}\n\n/**\n * @function\n * @memberof Popper.Utils\n * @argument {Object} data - The data object generated by `update` method\n * @argument {Boolean} shouldRound - If the offsets should be rounded at all\n * @returns {Object} The popper's position offsets rounded\n *\n * The tale of pixel-perfect positioning. It's still not 100% perfect, but as\n * good as it can be within reason.\n * Discussion here: https://github.com/FezVrasta/popper.js/pull/715\n *\n * Low DPI screens cause a popper to be blurry if not using full pixels (Safari\n * as well on High DPI screens).\n *\n * Firefox prefers no rounding for positioning and does not have blurriness on\n * high DPI screens.\n *\n * Only horizontal placement and left/right values need to be considered.\n */\nfunction getRoundedOffsets(data, shouldRound) {\n  var _data$offsets = data.offsets,\n      popper = _data$offsets.popper,\n      reference = _data$offsets.reference;\n  var round = Math.round,\n      floor = Math.floor;\n\n  var noRound = function noRound(v) {\n    return v;\n  };\n\n  var referenceWidth = round(reference.width);\n  var popperWidth = round(popper.width);\n\n  var isVertical = ['left', 'right'].indexOf(data.placement) !== -1;\n  var isVariation = data.placement.indexOf('-') !== -1;\n  var sameWidthParity = referenceWidth % 2 === popperWidth % 2;\n  var bothOddWidth = referenceWidth % 2 === 1 && popperWidth % 2 === 1;\n\n  var horizontalToInteger = !shouldRound ? noRound : isVertical || isVariation || sameWidthParity ? round : floor;\n  var verticalToInteger = !shouldRound ? noRound : round;\n\n  return {\n    left: horizontalToInteger(bothOddWidth && !isVariation && shouldRound ? popper.left - 1 : popper.left),\n    top: verticalToInteger(popper.top),\n    bottom: verticalToInteger(popper.bottom),\n    right: horizontalToInteger(popper.right)\n  };\n}\n\nvar isFirefox = isBrowser && /Firefox/i.test(navigator.userAgent);\n\n/**\n * @function\n * @memberof Modifiers\n * @argument {Object} data - The data object generated by `update` method\n * @argument {Object} options - Modifiers configuration and options\n * @returns {Object} The data object, properly modified\n */\nfunction computeStyle(data, options) {\n  var x = options.x,\n      y = options.y;\n  var popper = data.offsets.popper;\n\n  // Remove this legacy support in Popper.js v2\n\n  var legacyGpuAccelerationOption = find(data.instance.modifiers, function (modifier) {\n    return modifier.name === 'applyStyle';\n  }).gpuAcceleration;\n  if (legacyGpuAccelerationOption !== undefined) {\n    console.warn('WARNING: `gpuAcceleration` option moved to `computeStyle` modifier and will not be supported in future versions of Popper.js!');\n  }\n  var gpuAcceleration = legacyGpuAccelerationOption !== undefined ? legacyGpuAccelerationOption : options.gpuAcceleration;\n\n  var offsetParent = getOffsetParent(data.instance.popper);\n  var offsetParentRect = getBoundingClientRect(offsetParent);\n\n  // Styles\n  var styles = {\n    position: popper.position\n  };\n\n  var offsets = getRoundedOffsets(data, window.devicePixelRatio < 2 || !isFirefox);\n\n  var sideA = x === 'bottom' ? 'top' : 'bottom';\n  var sideB = y === 'right' ? 'left' : 'right';\n\n  // if gpuAcceleration is set to `true` and transform is supported,\n  //  we use `translate3d` to apply the position to the popper we\n  // automatically use the supported prefixed version if needed\n  var prefixedProperty = getSupportedPropertyName('transform');\n\n  // now, let's make a step back and look at this code closely (wtf?)\n  // If the content of the popper grows once it's been positioned, it\n  // may happen that the popper gets misplaced because of the new content\n  // overflowing its reference element\n  // To avoid this problem, we provide two options (x and y), which allow\n  // the consumer to define the offset origin.\n  // If we position a popper on top of a reference element, we can set\n  // `x` to `top` to make the popper grow towards its top instead of\n  // its bottom.\n  var left = void 0,\n      top = void 0;\n  if (sideA === 'bottom') {\n    // when offsetParent is <html> the positioning is relative to the bottom of the screen (excluding the scrollbar)\n    // and not the bottom of the html element\n    if (offsetParent.nodeName === 'HTML') {\n      top = -offsetParent.clientHeight + offsets.bottom;\n    } else {\n      top = -offsetParentRect.height + offsets.bottom;\n    }\n  } else {\n    top = offsets.top;\n  }\n  if (sideB === 'right') {\n    if (offsetParent.nodeName === 'HTML') {\n      left = -offsetParent.clientWidth + offsets.right;\n    } else {\n      left = -offsetParentRect.width + offsets.right;\n    }\n  } else {\n    left = offsets.left;\n  }\n  if (gpuAcceleration && prefixedProperty) {\n    styles[prefixedProperty] = 'translate3d(' + left + 'px, ' + top + 'px, 0)';\n    styles[sideA] = 0;\n    styles[sideB] = 0;\n    styles.willChange = 'transform';\n  } else {\n    // othwerise, we use the standard `top`, `left`, `bottom` and `right` properties\n    var invertTop = sideA === 'bottom' ? -1 : 1;\n    var invertLeft = sideB === 'right' ? -1 : 1;\n    styles[sideA] = top * invertTop;\n    styles[sideB] = left * invertLeft;\n    styles.willChange = sideA + ', ' + sideB;\n  }\n\n  // Attributes\n  var attributes = {\n    'x-placement': data.placement\n  };\n\n  // Update `data` attributes, styles and arrowStyles\n  data.attributes = _extends({}, attributes, data.attributes);\n  data.styles = _extends({}, styles, data.styles);\n  data.arrowStyles = _extends({}, data.offsets.arrow, data.arrowStyles);\n\n  return data;\n}\n\n/**\n * Helper used to know if the given modifier depends from another one.<br />\n * It checks if the needed modifier is listed and enabled.\n * @method\n * @memberof Popper.Utils\n * @param {Array} modifiers - list of modifiers\n * @param {String} requestingName - name of requesting modifier\n * @param {String} requestedName - name of requested modifier\n * @returns {Boolean}\n */\nfunction isModifierRequired(modifiers, requestingName, requestedName) {\n  var requesting = find(modifiers, function (_ref) {\n    var name = _ref.name;\n    return name === requestingName;\n  });\n\n  var isRequired = !!requesting && modifiers.some(function (modifier) {\n    return modifier.name === requestedName && modifier.enabled && modifier.order < requesting.order;\n  });\n\n  if (!isRequired) {\n    var _requesting = '`' + requestingName + '`';\n    var requested = '`' + requestedName + '`';\n    console.warn(requested + ' modifier is required by ' + _requesting + ' modifier in order to work, be sure to include it before ' + _requesting + '!');\n  }\n  return isRequired;\n}\n\n/**\n * @function\n * @memberof Modifiers\n * @argument {Object} data - The data object generated by update method\n * @argument {Object} options - Modifiers configuration and options\n * @returns {Object} The data object, properly modified\n */\nfunction arrow(data, options) {\n  var _data$offsets$arrow;\n\n  // arrow depends on keepTogether in order to work\n  if (!isModifierRequired(data.instance.modifiers, 'arrow', 'keepTogether')) {\n    return data;\n  }\n\n  var arrowElement = options.element;\n\n  // if arrowElement is a string, suppose it's a CSS selector\n  if (typeof arrowElement === 'string') {\n    arrowElement = data.instance.popper.querySelector(arrowElement);\n\n    // if arrowElement is not found, don't run the modifier\n    if (!arrowElement) {\n      return data;\n    }\n  } else {\n    // if the arrowElement isn't a query selector we must check that the\n    // provided DOM node is child of its popper node\n    if (!data.instance.popper.contains(arrowElement)) {\n      console.warn('WARNING: `arrow.element` must be child of its popper element!');\n      return data;\n    }\n  }\n\n  var placement = data.placement.split('-')[0];\n  var _data$offsets = data.offsets,\n      popper = _data$offsets.popper,\n      reference = _data$offsets.reference;\n\n  var isVertical = ['left', 'right'].indexOf(placement) !== -1;\n\n  var len = isVertical ? 'height' : 'width';\n  var sideCapitalized = isVertical ? 'Top' : 'Left';\n  var side = sideCapitalized.toLowerCase();\n  var altSide = isVertical ? 'left' : 'top';\n  var opSide = isVertical ? 'bottom' : 'right';\n  var arrowElementSize = getOuterSizes(arrowElement)[len];\n\n  //\n  // extends keepTogether behavior making sure the popper and its\n  // reference have enough pixels in conjunction\n  //\n\n  // top/left side\n  if (reference[opSide] - arrowElementSize < popper[side]) {\n    data.offsets.popper[side] -= popper[side] - (reference[opSide] - arrowElementSize);\n  }\n  // bottom/right side\n  if (reference[side] + arrowElementSize > popper[opSide]) {\n    data.offsets.popper[side] += reference[side] + arrowElementSize - popper[opSide];\n  }\n  data.offsets.popper = getClientRect(data.offsets.popper);\n\n  // compute center of the popper\n  var center = reference[side] + reference[len] / 2 - arrowElementSize / 2;\n\n  // Compute the sideValue using the updated popper offsets\n  // take popper margin in account because we don't have this info available\n  var css = getStyleComputedProperty(data.instance.popper);\n  var popperMarginSide = parseFloat(css['margin' + sideCapitalized]);\n  var popperBorderSide = parseFloat(css['border' + sideCapitalized + 'Width']);\n  var sideValue = center - data.offsets.popper[side] - popperMarginSide - popperBorderSide;\n\n  // prevent arrowElement from being placed not contiguously to its popper\n  sideValue = Math.max(Math.min(popper[len] - arrowElementSize, sideValue), 0);\n\n  data.arrowElement = arrowElement;\n  data.offsets.arrow = (_data$offsets$arrow = {}, defineProperty(_data$offsets$arrow, side, Math.round(sideValue)), defineProperty(_data$offsets$arrow, altSide, ''), _data$offsets$arrow);\n\n  return data;\n}\n\n/**\n * Get the opposite placement variation of the given one\n * @method\n * @memberof Popper.Utils\n * @argument {String} placement variation\n * @returns {String} flipped placement variation\n */\nfunction getOppositeVariation(variation) {\n  if (variation === 'end') {\n    return 'start';\n  } else if (variation === 'start') {\n    return 'end';\n  }\n  return variation;\n}\n\n/**\n * List of accepted placements to use as values of the `placement` option.<br />\n * Valid placements are:\n * - `auto`\n * - `top`\n * - `right`\n * - `bottom`\n * - `left`\n *\n * Each placement can have a variation from this list:\n * - `-start`\n * - `-end`\n *\n * Variations are interpreted easily if you think of them as the left to right\n * written languages. Horizontally (`top` and `bottom`), `start` is left and `end`\n * is right.<br />\n * Vertically (`left` and `right`), `start` is top and `end` is bottom.\n *\n * Some valid examples are:\n * - `top-end` (on top of reference, right aligned)\n * - `right-start` (on right of reference, top aligned)\n * - `bottom` (on bottom, centered)\n * - `auto-end` (on the side with more space available, alignment depends by placement)\n *\n * @static\n * @type {Array}\n * @enum {String}\n * @readonly\n * @method placements\n * @memberof Popper\n */\nvar placements = ['auto-start', 'auto', 'auto-end', 'top-start', 'top', 'top-end', 'right-start', 'right', 'right-end', 'bottom-end', 'bottom', 'bottom-start', 'left-end', 'left', 'left-start'];\n\n// Get rid of `auto` `auto-start` and `auto-end`\nvar validPlacements = placements.slice(3);\n\n/**\n * Given an initial placement, returns all the subsequent placements\n * clockwise (or counter-clockwise).\n *\n * @method\n * @memberof Popper.Utils\n * @argument {String} placement - A valid placement (it accepts variations)\n * @argument {Boolean} counter - Set to true to walk the placements counterclockwise\n * @returns {Array} placements including their variations\n */\nfunction clockwise(placement) {\n  var counter = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;\n\n  var index = validPlacements.indexOf(placement);\n  var arr = validPlacements.slice(index + 1).concat(validPlacements.slice(0, index));\n  return counter ? arr.reverse() : arr;\n}\n\nvar BEHAVIORS = {\n  FLIP: 'flip',\n  CLOCKWISE: 'clockwise',\n  COUNTERCLOCKWISE: 'counterclockwise'\n};\n\n/**\n * @function\n * @memberof Modifiers\n * @argument {Object} data - The data object generated by update method\n * @argument {Object} options - Modifiers configuration and options\n * @returns {Object} The data object, properly modified\n */\nfunction flip(data, options) {\n  // if `inner` modifier is enabled, we can't use the `flip` modifier\n  if (isModifierEnabled(data.instance.modifiers, 'inner')) {\n    return data;\n  }\n\n  if (data.flipped && data.placement === data.originalPlacement) {\n    // seems like flip is trying to loop, probably there's not enough space on any of the flippable sides\n    return data;\n  }\n\n  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, options.boundariesElement, data.positionFixed);\n\n  var placement = data.placement.split('-')[0];\n  var placementOpposite = getOppositePlacement(placement);\n  var variation = data.placement.split('-')[1] || '';\n\n  var flipOrder = [];\n\n  switch (options.behavior) {\n    case BEHAVIORS.FLIP:\n      flipOrder = [placement, placementOpposite];\n      break;\n    case BEHAVIORS.CLOCKWISE:\n      flipOrder = clockwise(placement);\n      break;\n    case BEHAVIORS.COUNTERCLOCKWISE:\n      flipOrder = clockwise(placement, true);\n      break;\n    default:\n      flipOrder = options.behavior;\n  }\n\n  flipOrder.forEach(function (step, index) {\n    if (placement !== step || flipOrder.length === index + 1) {\n      return data;\n    }\n\n    placement = data.placement.split('-')[0];\n    placementOpposite = getOppositePlacement(placement);\n\n    var popperOffsets = data.offsets.popper;\n    var refOffsets = data.offsets.reference;\n\n    // using floor because the reference offsets may contain decimals we are not going to consider here\n    var floor = Math.floor;\n    var overlapsRef = placement === 'left' && floor(popperOffsets.right) > floor(refOffsets.left) || placement === 'right' && floor(popperOffsets.left) < floor(refOffsets.right) || placement === 'top' && floor(popperOffsets.bottom) > floor(refOffsets.top) || placement === 'bottom' && floor(popperOffsets.top) < floor(refOffsets.bottom);\n\n    var overflowsLeft = floor(popperOffsets.left) < floor(boundaries.left);\n    var overflowsRight = floor(popperOffsets.right) > floor(boundaries.right);\n    var overflowsTop = floor(popperOffsets.top) < floor(boundaries.top);\n    var overflowsBottom = floor(popperOffsets.bottom) > floor(boundaries.bottom);\n\n    var overflowsBoundaries = placement === 'left' && overflowsLeft || placement === 'right' && overflowsRight || placement === 'top' && overflowsTop || placement === 'bottom' && overflowsBottom;\n\n    // flip the variation if required\n    var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;\n\n    // flips variation if reference element overflows boundaries\n    var flippedVariationByRef = !!options.flipVariations && (isVertical && variation === 'start' && overflowsLeft || isVertical && variation === 'end' && overflowsRight || !isVertical && variation === 'start' && overflowsTop || !isVertical && variation === 'end' && overflowsBottom);\n\n    // flips variation if popper content overflows boundaries\n    var flippedVariationByContent = !!options.flipVariationsByContent && (isVertical && variation === 'start' && overflowsRight || isVertical && variation === 'end' && overflowsLeft || !isVertical && variation === 'start' && overflowsBottom || !isVertical && variation === 'end' && overflowsTop);\n\n    var flippedVariation = flippedVariationByRef || flippedVariationByContent;\n\n    if (overlapsRef || overflowsBoundaries || flippedVariation) {\n      // this boolean to detect any flip loop\n      data.flipped = true;\n\n      if (overlapsRef || overflowsBoundaries) {\n        placement = flipOrder[index + 1];\n      }\n\n      if (flippedVariation) {\n        variation = getOppositeVariation(variation);\n      }\n\n      data.placement = placement + (variation ? '-' + variation : '');\n\n      // this object contains `position`, we want to preserve it along with\n      // any additional property we may add in the future\n      data.offsets.popper = _extends({}, data.offsets.popper, getPopperOffsets(data.instance.popper, data.offsets.reference, data.placement));\n\n      data = runModifiers(data.instance.modifiers, data, 'flip');\n    }\n  });\n  return data;\n}\n\n/**\n * @function\n * @memberof Modifiers\n * @argument {Object} data - The data object generated by update method\n * @argument {Object} options - Modifiers configuration and options\n * @returns {Object} The data object, properly modified\n */\nfunction keepTogether(data) {\n  var _data$offsets = data.offsets,\n      popper = _data$offsets.popper,\n      reference = _data$offsets.reference;\n\n  var placement = data.placement.split('-')[0];\n  var floor = Math.floor;\n  var isVertical = ['top', 'bottom'].indexOf(placement) !== -1;\n  var side = isVertical ? 'right' : 'bottom';\n  var opSide = isVertical ? 'left' : 'top';\n  var measurement = isVertical ? 'width' : 'height';\n\n  if (popper[side] < floor(reference[opSide])) {\n    data.offsets.popper[opSide] = floor(reference[opSide]) - popper[measurement];\n  }\n  if (popper[opSide] > floor(reference[side])) {\n    data.offsets.popper[opSide] = floor(reference[side]);\n  }\n\n  return data;\n}\n\n/**\n * Converts a string containing value + unit into a px value number\n * @function\n * @memberof {modifiers~offset}\n * @private\n * @argument {String} str - Value + unit string\n * @argument {String} measurement - `height` or `width`\n * @argument {Object} popperOffsets\n * @argument {Object} referenceOffsets\n * @returns {Number|String}\n * Value in pixels, or original string if no values were extracted\n */\nfunction toValue(str, measurement, popperOffsets, referenceOffsets) {\n  // separate value from unit\n  var split = str.match(/((?:\\-|\\+)?\\d*\\.?\\d*)(.*)/);\n  var value = +split[1];\n  var unit = split[2];\n\n  // If it's not a number it's an operator, I guess\n  if (!value) {\n    return str;\n  }\n\n  if (unit.indexOf('%') === 0) {\n    var element = void 0;\n    switch (unit) {\n      case '%p':\n        element = popperOffsets;\n        break;\n      case '%':\n      case '%r':\n      default:\n        element = referenceOffsets;\n    }\n\n    var rect = getClientRect(element);\n    return rect[measurement] / 100 * value;\n  } else if (unit === 'vh' || unit === 'vw') {\n    // if is a vh or vw, we calculate the size based on the viewport\n    var size = void 0;\n    if (unit === 'vh') {\n      size = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);\n    } else {\n      size = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);\n    }\n    return size / 100 * value;\n  } else {\n    // if is an explicit pixel unit, we get rid of the unit and keep the value\n    // if is an implicit unit, it's px, and we return just the value\n    return value;\n  }\n}\n\n/**\n * Parse an `offset` string to extrapolate `x` and `y` numeric offsets.\n * @function\n * @memberof {modifiers~offset}\n * @private\n * @argument {String} offset\n * @argument {Object} popperOffsets\n * @argument {Object} referenceOffsets\n * @argument {String} basePlacement\n * @returns {Array} a two cells array with x and y offsets in numbers\n */\nfunction parseOffset(offset, popperOffsets, referenceOffsets, basePlacement) {\n  var offsets = [0, 0];\n\n  // Use height if placement is left or right and index is 0 otherwise use width\n  // in this way the first offset will use an axis and the second one\n  // will use the other one\n  var useHeight = ['right', 'left'].indexOf(basePlacement) !== -1;\n\n  // Split the offset string to obtain a list of values and operands\n  // The regex addresses values with the plus or minus sign in front (+10, -20, etc)\n  var fragments = offset.split(/(\\+|\\-)/).map(function (frag) {\n    return frag.trim();\n  });\n\n  // Detect if the offset string contains a pair of values or a single one\n  // they could be separated by comma or space\n  var divider = fragments.indexOf(find(fragments, function (frag) {\n    return frag.search(/,|\\s/) !== -1;\n  }));\n\n  if (fragments[divider] && fragments[divider].indexOf(',') === -1) {\n    console.warn('Offsets separated by white space(s) are deprecated, use a comma (,) instead.');\n  }\n\n  // If divider is found, we divide the list of values and operands to divide\n  // them by ofset X and Y.\n  var splitRegex = /\\s*,\\s*|\\s+/;\n  var ops = divider !== -1 ? [fragments.slice(0, divider).concat([fragments[divider].split(splitRegex)[0]]), [fragments[divider].split(splitRegex)[1]].concat(fragments.slice(divider + 1))] : [fragments];\n\n  // Convert the values with units to absolute pixels to allow our computations\n  ops = ops.map(function (op, index) {\n    // Most of the units rely on the orientation of the popper\n    var measurement = (index === 1 ? !useHeight : useHeight) ? 'height' : 'width';\n    var mergeWithPrevious = false;\n    return op\n    // This aggregates any `+` or `-` sign that aren't considered operators\n    // e.g.: 10 + +5 => [10, +, +5]\n    .reduce(function (a, b) {\n      if (a[a.length - 1] === '' && ['+', '-'].indexOf(b) !== -1) {\n        a[a.length - 1] = b;\n        mergeWithPrevious = true;\n        return a;\n      } else if (mergeWithPrevious) {\n        a[a.length - 1] += b;\n        mergeWithPrevious = false;\n        return a;\n      } else {\n        return a.concat(b);\n      }\n    }, [])\n    // Here we convert the string values into number values (in px)\n    .map(function (str) {\n      return toValue(str, measurement, popperOffsets, referenceOffsets);\n    });\n  });\n\n  // Loop trough the offsets arrays and execute the operations\n  ops.forEach(function (op, index) {\n    op.forEach(function (frag, index2) {\n      if (isNumeric(frag)) {\n        offsets[index] += frag * (op[index2 - 1] === '-' ? -1 : 1);\n      }\n    });\n  });\n  return offsets;\n}\n\n/**\n * @function\n * @memberof Modifiers\n * @argument {Object} data - The data object generated by update method\n * @argument {Object} options - Modifiers configuration and options\n * @argument {Number|String} options.offset=0\n * The offset value as described in the modifier description\n * @returns {Object} The data object, properly modified\n */\nfunction offset(data, _ref) {\n  var offset = _ref.offset;\n  var placement = data.placement,\n      _data$offsets = data.offsets,\n      popper = _data$offsets.popper,\n      reference = _data$offsets.reference;\n\n  var basePlacement = placement.split('-')[0];\n\n  var offsets = void 0;\n  if (isNumeric(+offset)) {\n    offsets = [+offset, 0];\n  } else {\n    offsets = parseOffset(offset, popper, reference, basePlacement);\n  }\n\n  if (basePlacement === 'left') {\n    popper.top += offsets[0];\n    popper.left -= offsets[1];\n  } else if (basePlacement === 'right') {\n    popper.top += offsets[0];\n    popper.left += offsets[1];\n  } else if (basePlacement === 'top') {\n    popper.left += offsets[0];\n    popper.top -= offsets[1];\n  } else if (basePlacement === 'bottom') {\n    popper.left += offsets[0];\n    popper.top += offsets[1];\n  }\n\n  data.popper = popper;\n  return data;\n}\n\n/**\n * @function\n * @memberof Modifiers\n * @argument {Object} data - The data object generated by `update` method\n * @argument {Object} options - Modifiers configuration and options\n * @returns {Object} The data object, properly modified\n */\nfunction preventOverflow(data, options) {\n  var boundariesElement = options.boundariesElement || getOffsetParent(data.instance.popper);\n\n  // If offsetParent is the reference element, we really want to\n  // go one step up and use the next offsetParent as reference to\n  // avoid to make this modifier completely useless and look like broken\n  if (data.instance.reference === boundariesElement) {\n    boundariesElement = getOffsetParent(boundariesElement);\n  }\n\n  // NOTE: DOM access here\n  // resets the popper's position so that the document size can be calculated excluding\n  // the size of the popper element itself\n  var transformProp = getSupportedPropertyName('transform');\n  var popperStyles = data.instance.popper.style; // assignment to help minification\n  var top = popperStyles.top,\n      left = popperStyles.left,\n      transform = popperStyles[transformProp];\n\n  popperStyles.top = '';\n  popperStyles.left = '';\n  popperStyles[transformProp] = '';\n\n  var boundaries = getBoundaries(data.instance.popper, data.instance.reference, options.padding, boundariesElement, data.positionFixed);\n\n  // NOTE: DOM access here\n  // restores the original style properties after the offsets have been computed\n  popperStyles.top = top;\n  popperStyles.left = left;\n  popperStyles[transformProp] = transform;\n\n  options.boundaries = boundaries;\n\n  var order = options.priority;\n  var popper = data.offsets.popper;\n\n  var check = {\n    primary: function primary(placement) {\n      var value = popper[placement];\n      if (popper[placement] < boundaries[placement] && !options.escapeWithReference) {\n        value = Math.max(popper[placement], boundaries[placement]);\n      }\n      return defineProperty({}, placement, value);\n    },\n    secondary: function secondary(placement) {\n      var mainSide = placement === 'right' ? 'left' : 'top';\n      var value = popper[mainSide];\n      if (popper[placement] > boundaries[placement] && !options.escapeWithReference) {\n        value = Math.min(popper[mainSide], boundaries[placement] - (placement === 'right' ? popper.width : popper.height));\n      }\n      return defineProperty({}, mainSide, value);\n    }\n  };\n\n  order.forEach(function (placement) {\n    var side = ['left', 'top'].indexOf(placement) !== -1 ? 'primary' : 'secondary';\n    popper = _extends({}, popper, check[side](placement));\n  });\n\n  data.offsets.popper = popper;\n\n  return data;\n}\n\n/**\n * @function\n * @memberof Modifiers\n * @argument {Object} data - The data object generated by `update` method\n * @argument {Object} options - Modifiers configuration and options\n * @returns {Object} The data object, properly modified\n */\nfunction shift(data) {\n  var placement = data.placement;\n  var basePlacement = placement.split('-')[0];\n  var shiftvariation = placement.split('-')[1];\n\n  // if shift shiftvariation is specified, run the modifier\n  if (shiftvariation) {\n    var _data$offsets = data.offsets,\n        reference = _data$offsets.reference,\n        popper = _data$offsets.popper;\n\n    var isVertical = ['bottom', 'top'].indexOf(basePlacement) !== -1;\n    var side = isVertical ? 'left' : 'top';\n    var measurement = isVertical ? 'width' : 'height';\n\n    var shiftOffsets = {\n      start: defineProperty({}, side, reference[side]),\n      end: defineProperty({}, side, reference[side] + reference[measurement] - popper[measurement])\n    };\n\n    data.offsets.popper = _extends({}, popper, shiftOffsets[shiftvariation]);\n  }\n\n  return data;\n}\n\n/**\n * @function\n * @memberof Modifiers\n * @argument {Object} data - The data object generated by update method\n * @argument {Object} options - Modifiers configuration and options\n * @returns {Object} The data object, properly modified\n */\nfunction hide(data) {\n  if (!isModifierRequired(data.instance.modifiers, 'hide', 'preventOverflow')) {\n    return data;\n  }\n\n  var refRect = data.offsets.reference;\n  var bound = find(data.instance.modifiers, function (modifier) {\n    return modifier.name === 'preventOverflow';\n  }).boundaries;\n\n  if (refRect.bottom < bound.top || refRect.left > bound.right || refRect.top > bound.bottom || refRect.right < bound.left) {\n    // Avoid unnecessary DOM access if visibility hasn't changed\n    if (data.hide === true) {\n      return data;\n    }\n\n    data.hide = true;\n    data.attributes['x-out-of-boundaries'] = '';\n  } else {\n    // Avoid unnecessary DOM access if visibility hasn't changed\n    if (data.hide === false) {\n      return data;\n    }\n\n    data.hide = false;\n    data.attributes['x-out-of-boundaries'] = false;\n  }\n\n  return data;\n}\n\n/**\n * @function\n * @memberof Modifiers\n * @argument {Object} data - The data object generated by `update` method\n * @argument {Object} options - Modifiers configuration and options\n * @returns {Object} The data object, properly modified\n */\nfunction inner(data) {\n  var placement = data.placement;\n  var basePlacement = placement.split('-')[0];\n  var _data$offsets = data.offsets,\n      popper = _data$offsets.popper,\n      reference = _data$offsets.reference;\n\n  var isHoriz = ['left', 'right'].indexOf(basePlacement) !== -1;\n\n  var subtractLength = ['top', 'left'].indexOf(basePlacement) === -1;\n\n  popper[isHoriz ? 'left' : 'top'] = reference[basePlacement] - (subtractLength ? popper[isHoriz ? 'width' : 'height'] : 0);\n\n  data.placement = getOppositePlacement(placement);\n  data.offsets.popper = getClientRect(popper);\n\n  return data;\n}\n\n/**\n * Modifier function, each modifier can have a function of this type assigned\n * to its `fn` property.<br />\n * These functions will be called on each update, this means that you must\n * make sure they are performant enough to avoid performance bottlenecks.\n *\n * @function ModifierFn\n * @argument {dataObject} data - The data object generated by `update` method\n * @argument {Object} options - Modifiers configuration and options\n * @returns {dataObject} The data object, properly modified\n */\n\n/**\n * Modifiers are plugins used to alter the behavior of your poppers.<br />\n * Popper.js uses a set of 9 modifiers to provide all the basic functionalities\n * needed by the library.\n *\n * Usually you don't want to override the `order`, `fn` and `onLoad` props.\n * All the other properties are configurations that could be tweaked.\n * @namespace modifiers\n */\nvar modifiers = {\n  /**\n   * Modifier used to shift the popper on the start or end of its reference\n   * element.<br />\n   * It will read the variation of the `placement` property.<br />\n   * It can be one either `-end` or `-start`.\n   * @memberof modifiers\n   * @inner\n   */\n  shift: {\n    /** @prop {number} order=100 - Index used to define the order of execution */\n    order: 100,\n    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */\n    enabled: true,\n    /** @prop {ModifierFn} */\n    fn: shift\n  },\n\n  /**\n   * The `offset` modifier can shift your popper on both its axis.\n   *\n   * It accepts the following units:\n   * - `px` or unit-less, interpreted as pixels\n   * - `%` or `%r`, percentage relative to the length of the reference element\n   * - `%p`, percentage relative to the length of the popper element\n   * - `vw`, CSS viewport width unit\n   * - `vh`, CSS viewport height unit\n   *\n   * For length is intended the main axis relative to the placement of the popper.<br />\n   * This means that if the placement is `top` or `bottom`, the length will be the\n   * `width`. In case of `left` or `right`, it will be the `height`.\n   *\n   * You can provide a single value (as `Number` or `String`), or a pair of values\n   * as `String` divided by a comma or one (or more) white spaces.<br />\n   * The latter is a deprecated method because it leads to confusion and will be\n   * removed in v2.<br />\n   * Additionally, it accepts additions and subtractions between different units.\n   * Note that multiplications and divisions aren't supported.\n   *\n   * Valid examples are:\n   * ```\n   * 10\n   * '10%'\n   * '10, 10'\n   * '10%, 10'\n   * '10 + 10%'\n   * '10 - 5vh + 3%'\n   * '-10px + 5vh, 5px - 6%'\n   * ```\n   * > **NB**: If you desire to apply offsets to your poppers in a way that may make them overlap\n   * > with their reference element, unfortunately, you will have to disable the `flip` modifier.\n   * > You can read more on this at this [issue](https://github.com/FezVrasta/popper.js/issues/373).\n   *\n   * @memberof modifiers\n   * @inner\n   */\n  offset: {\n    /** @prop {number} order=200 - Index used to define the order of execution */\n    order: 200,\n    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */\n    enabled: true,\n    /** @prop {ModifierFn} */\n    fn: offset,\n    /** @prop {Number|String} offset=0\n     * The offset value as described in the modifier description\n     */\n    offset: 0\n  },\n\n  /**\n   * Modifier used to prevent the popper from being positioned outside the boundary.\n   *\n   * A scenario exists where the reference itself is not within the boundaries.<br />\n   * We can say it has \"escaped the boundaries\" — or just \"escaped\".<br />\n   * In this case we need to decide whether the popper should either:\n   *\n   * - detach from the reference and remain \"trapped\" in the boundaries, or\n   * - if it should ignore the boundary and \"escape with its reference\"\n   *\n   * When `escapeWithReference` is set to`true` and reference is completely\n   * outside its boundaries, the popper will overflow (or completely leave)\n   * the boundaries in order to remain attached to the edge of the reference.\n   *\n   * @memberof modifiers\n   * @inner\n   */\n  preventOverflow: {\n    /** @prop {number} order=300 - Index used to define the order of execution */\n    order: 300,\n    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */\n    enabled: true,\n    /** @prop {ModifierFn} */\n    fn: preventOverflow,\n    /**\n     * @prop {Array} [priority=['left','right','top','bottom']]\n     * Popper will try to prevent overflow following these priorities by default,\n     * then, it could overflow on the left and on top of the `boundariesElement`\n     */\n    priority: ['left', 'right', 'top', 'bottom'],\n    /**\n     * @prop {number} padding=5\n     * Amount of pixel used to define a minimum distance between the boundaries\n     * and the popper. This makes sure the popper always has a little padding\n     * between the edges of its container\n     */\n    padding: 5,\n    /**\n     * @prop {String|HTMLElement} boundariesElement='scrollParent'\n     * Boundaries used by the modifier. Can be `scrollParent`, `window`,\n     * `viewport` or any DOM element.\n     */\n    boundariesElement: 'scrollParent'\n  },\n\n  /**\n   * Modifier used to make sure the reference and its popper stay near each other\n   * without leaving any gap between the two. Especially useful when the arrow is\n   * enabled and you want to ensure that it points to its reference element.\n   * It cares only about the first axis. You can still have poppers with margin\n   * between the popper and its reference element.\n   * @memberof modifiers\n   * @inner\n   */\n  keepTogether: {\n    /** @prop {number} order=400 - Index used to define the order of execution */\n    order: 400,\n    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */\n    enabled: true,\n    /** @prop {ModifierFn} */\n    fn: keepTogether\n  },\n\n  /**\n   * This modifier is used to move the `arrowElement` of the popper to make\n   * sure it is positioned between the reference element and its popper element.\n   * It will read the outer size of the `arrowElement` node to detect how many\n   * pixels of conjunction are needed.\n   *\n   * It has no effect if no `arrowElement` is provided.\n   * @memberof modifiers\n   * @inner\n   */\n  arrow: {\n    /** @prop {number} order=500 - Index used to define the order of execution */\n    order: 500,\n    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */\n    enabled: true,\n    /** @prop {ModifierFn} */\n    fn: arrow,\n    /** @prop {String|HTMLElement} element='[x-arrow]' - Selector or node used as arrow */\n    element: '[x-arrow]'\n  },\n\n  /**\n   * Modifier used to flip the popper's placement when it starts to overlap its\n   * reference element.\n   *\n   * Requires the `preventOverflow` modifier before it in order to work.\n   *\n   * **NOTE:** this modifier will interrupt the current update cycle and will\n   * restart it if it detects the need to flip the placement.\n   * @memberof modifiers\n   * @inner\n   */\n  flip: {\n    /** @prop {number} order=600 - Index used to define the order of execution */\n    order: 600,\n    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */\n    enabled: true,\n    /** @prop {ModifierFn} */\n    fn: flip,\n    /**\n     * @prop {String|Array} behavior='flip'\n     * The behavior used to change the popper's placement. It can be one of\n     * `flip`, `clockwise`, `counterclockwise` or an array with a list of valid\n     * placements (with optional variations)\n     */\n    behavior: 'flip',\n    /**\n     * @prop {number} padding=5\n     * The popper will flip if it hits the edges of the `boundariesElement`\n     */\n    padding: 5,\n    /**\n     * @prop {String|HTMLElement} boundariesElement='viewport'\n     * The element which will define the boundaries of the popper position.\n     * The popper will never be placed outside of the defined boundaries\n     * (except if `keepTogether` is enabled)\n     */\n    boundariesElement: 'viewport',\n    /**\n     * @prop {Boolean} flipVariations=false\n     * The popper will switch placement variation between `-start` and `-end` when\n     * the reference element overlaps its boundaries.\n     *\n     * The original placement should have a set variation.\n     */\n    flipVariations: false,\n    /**\n     * @prop {Boolean} flipVariationsByContent=false\n     * The popper will switch placement variation between `-start` and `-end` when\n     * the popper element overlaps its reference boundaries.\n     *\n     * The original placement should have a set variation.\n     */\n    flipVariationsByContent: false\n  },\n\n  /**\n   * Modifier used to make the popper flow toward the inner of the reference element.\n   * By default, when this modifier is disabled, the popper will be placed outside\n   * the reference element.\n   * @memberof modifiers\n   * @inner\n   */\n  inner: {\n    /** @prop {number} order=700 - Index used to define the order of execution */\n    order: 700,\n    /** @prop {Boolean} enabled=false - Whether the modifier is enabled or not */\n    enabled: false,\n    /** @prop {ModifierFn} */\n    fn: inner\n  },\n\n  /**\n   * Modifier used to hide the popper when its reference element is outside of the\n   * popper boundaries. It will set a `x-out-of-boundaries` attribute which can\n   * be used to hide with a CSS selector the popper when its reference is\n   * out of boundaries.\n   *\n   * Requires the `preventOverflow` modifier before it in order to work.\n   * @memberof modifiers\n   * @inner\n   */\n  hide: {\n    /** @prop {number} order=800 - Index used to define the order of execution */\n    order: 800,\n    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */\n    enabled: true,\n    /** @prop {ModifierFn} */\n    fn: hide\n  },\n\n  /**\n   * Computes the style that will be applied to the popper element to gets\n   * properly positioned.\n   *\n   * Note that this modifier will not touch the DOM, it just prepares the styles\n   * so that `applyStyle` modifier can apply it. This separation is useful\n   * in case you need to replace `applyStyle` with a custom implementation.\n   *\n   * This modifier has `850` as `order` value to maintain backward compatibility\n   * with previous versions of Popper.js. Expect the modifiers ordering method\n   * to change in future major versions of the library.\n   *\n   * @memberof modifiers\n   * @inner\n   */\n  computeStyle: {\n    /** @prop {number} order=850 - Index used to define the order of execution */\n    order: 850,\n    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */\n    enabled: true,\n    /** @prop {ModifierFn} */\n    fn: computeStyle,\n    /**\n     * @prop {Boolean} gpuAcceleration=true\n     * If true, it uses the CSS 3D transformation to position the popper.\n     * Otherwise, it will use the `top` and `left` properties\n     */\n    gpuAcceleration: true,\n    /**\n     * @prop {string} [x='bottom']\n     * Where to anchor the X axis (`bottom` or `top`). AKA X offset origin.\n     * Change this if your popper should grow in a direction different from `bottom`\n     */\n    x: 'bottom',\n    /**\n     * @prop {string} [x='left']\n     * Where to anchor the Y axis (`left` or `right`). AKA Y offset origin.\n     * Change this if your popper should grow in a direction different from `right`\n     */\n    y: 'right'\n  },\n\n  /**\n   * Applies the computed styles to the popper element.\n   *\n   * All the DOM manipulations are limited to this modifier. This is useful in case\n   * you want to integrate Popper.js inside a framework or view library and you\n   * want to delegate all the DOM manipulations to it.\n   *\n   * Note that if you disable this modifier, you must make sure the popper element\n   * has its position set to `absolute` before Popper.js can do its work!\n   *\n   * Just disable this modifier and define your own to achieve the desired effect.\n   *\n   * @memberof modifiers\n   * @inner\n   */\n  applyStyle: {\n    /** @prop {number} order=900 - Index used to define the order of execution */\n    order: 900,\n    /** @prop {Boolean} enabled=true - Whether the modifier is enabled or not */\n    enabled: true,\n    /** @prop {ModifierFn} */\n    fn: applyStyle,\n    /** @prop {Function} */\n    onLoad: applyStyleOnLoad,\n    /**\n     * @deprecated since version 1.10.0, the property moved to `computeStyle` modifier\n     * @prop {Boolean} gpuAcceleration=true\n     * If true, it uses the CSS 3D transformation to position the popper.\n     * Otherwise, it will use the `top` and `left` properties\n     */\n    gpuAcceleration: undefined\n  }\n};\n\n/**\n * The `dataObject` is an object containing all the information used by Popper.js.\n * This object is passed to modifiers and to the `onCreate` and `onUpdate` callbacks.\n * @name dataObject\n * @property {Object} data.instance The Popper.js instance\n * @property {String} data.placement Placement applied to popper\n * @property {String} data.originalPlacement Placement originally defined on init\n * @property {Boolean} data.flipped True if popper has been flipped by flip modifier\n * @property {Boolean} data.hide True if the reference element is out of boundaries, useful to know when to hide the popper\n * @property {HTMLElement} data.arrowElement Node used as arrow by arrow modifier\n * @property {Object} data.styles Any CSS property defined here will be applied to the popper. It expects the JavaScript nomenclature (eg. `marginBottom`)\n * @property {Object} data.arrowStyles Any CSS property defined here will be applied to the popper arrow. It expects the JavaScript nomenclature (eg. `marginBottom`)\n * @property {Object} data.boundaries Offsets of the popper boundaries\n * @property {Object} data.offsets The measurements of popper, reference and arrow elements\n * @property {Object} data.offsets.popper `top`, `left`, `width`, `height` values\n * @property {Object} data.offsets.reference `top`, `left`, `width`, `height` values\n * @property {Object} data.offsets.arrow] `top` and `left` offsets, only one of them will be different from 0\n */\n\n/**\n * Default options provided to Popper.js constructor.<br />\n * These can be overridden using the `options` argument of Popper.js.<br />\n * To override an option, simply pass an object with the same\n * structure of the `options` object, as the 3rd argument. For example:\n * ```\n * new Popper(ref, pop, {\n *   modifiers: {\n *     preventOverflow: { enabled: false }\n *   }\n * })\n * ```\n * @type {Object}\n * @static\n * @memberof Popper\n */\nvar Defaults = {\n  /**\n   * Popper's placement.\n   * @prop {Popper.placements} placement='bottom'\n   */\n  placement: 'bottom',\n\n  /**\n   * Set this to true if you want popper to position it self in 'fixed' mode\n   * @prop {Boolean} positionFixed=false\n   */\n  positionFixed: false,\n\n  /**\n   * Whether events (resize, scroll) are initially enabled.\n   * @prop {Boolean} eventsEnabled=true\n   */\n  eventsEnabled: true,\n\n  /**\n   * Set to true if you want to automatically remove the popper when\n   * you call the `destroy` method.\n   * @prop {Boolean} removeOnDestroy=false\n   */\n  removeOnDestroy: false,\n\n  /**\n   * Callback called when the popper is created.<br />\n   * By default, it is set to no-op.<br />\n   * Access Popper.js instance with `data.instance`.\n   * @prop {onCreate}\n   */\n  onCreate: function onCreate() {},\n\n  /**\n   * Callback called when the popper is updated. This callback is not called\n   * on the initialization/creation of the popper, but only on subsequent\n   * updates.<br />\n   * By default, it is set to no-op.<br />\n   * Access Popper.js instance with `data.instance`.\n   * @prop {onUpdate}\n   */\n  onUpdate: function onUpdate() {},\n\n  /**\n   * List of modifiers used to modify the offsets before they are applied to the popper.\n   * They provide most of the functionalities of Popper.js.\n   * @prop {modifiers}\n   */\n  modifiers: modifiers\n};\n\n/**\n * @callback onCreate\n * @param {dataObject} data\n */\n\n/**\n * @callback onUpdate\n * @param {dataObject} data\n */\n\n// Utils\n// Methods\nvar Popper = function () {\n  /**\n   * Creates a new Popper.js instance.\n   * @class Popper\n   * @param {Element|referenceObject} reference - The reference element used to position the popper\n   * @param {Element} popper - The HTML / XML element used as the popper\n   * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)\n   * @return {Object} instance - The generated Popper.js instance\n   */\n  function Popper(reference, popper) {\n    var _this = this;\n\n    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};\n    classCallCheck(this, Popper);\n\n    this.scheduleUpdate = function () {\n      return requestAnimationFrame(_this.update);\n    };\n\n    // make update() debounced, so that it only runs at most once-per-tick\n    this.update = debounce(this.update.bind(this));\n\n    // with {} we create a new object with the options inside it\n    this.options = _extends({}, Popper.Defaults, options);\n\n    // init state\n    this.state = {\n      isDestroyed: false,\n      isCreated: false,\n      scrollParents: []\n    };\n\n    // get reference and popper elements (allow jQuery wrappers)\n    this.reference = reference && reference.jquery ? reference[0] : reference;\n    this.popper = popper && popper.jquery ? popper[0] : popper;\n\n    // Deep merge modifiers options\n    this.options.modifiers = {};\n    Object.keys(_extends({}, Popper.Defaults.modifiers, options.modifiers)).forEach(function (name) {\n      _this.options.modifiers[name] = _extends({}, Popper.Defaults.modifiers[name] || {}, options.modifiers ? options.modifiers[name] : {});\n    });\n\n    // Refactoring modifiers' list (Object => Array)\n    this.modifiers = Object.keys(this.options.modifiers).map(function (name) {\n      return _extends({\n        name: name\n      }, _this.options.modifiers[name]);\n    })\n    // sort the modifiers by order\n    .sort(function (a, b) {\n      return a.order - b.order;\n    });\n\n    // modifiers have the ability to execute arbitrary code when Popper.js get inited\n    // such code is executed in the same order of its modifier\n    // they could add new properties to their options configuration\n    // BE AWARE: don't add options to `options.modifiers.name` but to `modifierOptions`!\n    this.modifiers.forEach(function (modifierOptions) {\n      if (modifierOptions.enabled && isFunction(modifierOptions.onLoad)) {\n        modifierOptions.onLoad(_this.reference, _this.popper, _this.options, modifierOptions, _this.state);\n      }\n    });\n\n    // fire the first update to position the popper in the right place\n    this.update();\n\n    var eventsEnabled = this.options.eventsEnabled;\n    if (eventsEnabled) {\n      // setup event listeners, they will take care of update the position in specific situations\n      this.enableEventListeners();\n    }\n\n    this.state.eventsEnabled = eventsEnabled;\n  }\n\n  // We can't use class properties because they don't get listed in the\n  // class prototype and break stuff like Sinon stubs\n\n\n  createClass(Popper, [{\n    key: 'update',\n    value: function update$$1() {\n      return update.call(this);\n    }\n  }, {\n    key: 'destroy',\n    value: function destroy$$1() {\n      return destroy.call(this);\n    }\n  }, {\n    key: 'enableEventListeners',\n    value: function enableEventListeners$$1() {\n      return enableEventListeners.call(this);\n    }\n  }, {\n    key: 'disableEventListeners',\n    value: function disableEventListeners$$1() {\n      return disableEventListeners.call(this);\n    }\n\n    /**\n     * Schedules an update. It will run on the next UI update available.\n     * @method scheduleUpdate\n     * @memberof Popper\n     */\n\n\n    /**\n     * Collection of utilities useful when writing custom modifiers.\n     * Starting from version 1.7, this method is available only if you\n     * include `popper-utils.js` before `popper.js`.\n     *\n     * **DEPRECATION**: This way to access PopperUtils is deprecated\n     * and will be removed in v2! Use the PopperUtils module directly instead.\n     * Due to the high instability of the methods contained in Utils, we can't\n     * guarantee them to follow semver. Use them at your own risk!\n     * @static\n     * @private\n     * @type {Object}\n     * @deprecated since version 1.8\n     * @member Utils\n     * @memberof Popper\n     */\n\n  }]);\n  return Popper;\n}();\n\n/**\n * The `referenceObject` is an object that provides an interface compatible with Popper.js\n * and lets you use it as replacement of a real DOM node.<br />\n * You can use this method to position a popper relatively to a set of coordinates\n * in case you don't have a DOM node to use as reference.\n *\n * ```\n * new Popper(referenceObject, popperNode);\n * ```\n *\n * NB: This feature isn't supported in Internet Explorer 10.\n * @name referenceObject\n * @property {Function} data.getBoundingClientRect\n * A function that returns a set of coordinates compatible with the native `getBoundingClientRect` method.\n * @property {number} data.clientWidth\n * An ES6 getter that will return the width of the virtual reference element.\n * @property {number} data.clientHeight\n * An ES6 getter that will return the height of the virtual reference element.\n */\n\n\nPopper.Utils = (typeof window !== 'undefined' ? window : __webpack_require__.g).PopperUtils;\nPopper.placements = placements;\nPopper.Defaults = Defaults;\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Popper);\n//# sourceMappingURL=popper.js.map\n\n\n//# sourceURL=webpack://food-festival/./node_modules/popper.js/dist/esm/popper.js?");
 
+/***/ }),
+
+/***/ "./node_modules/webpack-plugin-serve/client.js":
+/*!*****************************************************!*
+  !*** ./node_modules/webpack-plugin-serve/client.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("/*\n  Copyright © 2018 Andrew Powell\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\n  The above copyright notice and this permission notice shall be\n  included in all copies or substantial portions of this Source Code Form.\n*/\n\n/**\n * @note This file exists merely as an easy reference for folks adding it to their configuration entries\n */\n\n(() => {\n  /* eslint-disable global-require */\n  const { run } = __webpack_require__(/*! ./lib/client/client */ \"./node_modules/webpack-plugin-serve/lib/client/client.js\");\n  let hash = '<unknown>';\n  let options;\n  try {\n    options = {\"compress\":null,\"headers\":null,\"historyFallback\":false,\"hmr\":true,\"host\":null,\"liveReload\":false,\"log\":{\"level\":\"info\",\"prefix\":{\"template\":\"{{level}}\"},\"name\":\"webpack-plugin-serve\"},\"open\":false,\"port\":55555,\"progress\":true,\"ramdisk\":false,\"secure\":false,\"static\":[\"/Users/LoganMerchant/Desktop/Projects/food-festival\"],\"status\":true,\"address\":\"[::]:55555\",\"compilerName\":null,\"wpsId\":\"8202411\"};\n  } catch (e) {\n    const { log } = __webpack_require__(/*! ./lib/client/log */ \"./node_modules/webpack-plugin-serve/lib/client/log.js\");\n    log.error(\n      'The entry for webpack-plugin-serve was included in your build, but it does not appear that the plugin was. Please check your configuration.'\n    );\n  }\n\n  try {\n    // eslint-disable-next-line camelcase\n    hash = __webpack_require__.h();\n  } catch (e) {} // eslint-disable-line no-empty\n\n  run(hash, options);\n})();\n\n\n//# sourceURL=webpack://food-festival/./node_modules/webpack-plugin-serve/client.js?");
+
+/***/ }),
+
+/***/ "./node_modules/webpack-plugin-serve/lib/client/ClientSocket.js":
+/*!**********************************************************************!*
+  !*** ./node_modules/webpack-plugin-serve/lib/client/ClientSocket.js ***!
+  \**********************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("/*\n  Copyright © 2018 Andrew Powell\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\n  The above copyright notice and this permission notice shall be\n  included in all copies or substantial portions of this Source Code Form.\n*/\nconst { error, refresh, warn } = __webpack_require__(/*! ./log */ \"./node_modules/webpack-plugin-serve/lib/client/log.js\")();\n\n// ignore 1008 (HTTP 400 equivalent) and 1011 (HTTP 500 equivalent)\nconst ignoreCodes = [1008, 1011];\nconst maxAttempts = 10;\n\nclass ClientSocket {\n  constructor(options, ...args) {\n    this.args = args;\n    this.attempts = 0;\n    this.eventHandlers = [];\n    this.options = options;\n    this.retrying = false;\n\n    this.connect();\n  }\n\n  addEventListener(...args) {\n    this.eventHandlers.push(args);\n    this.socket.addEventListener(...args);\n  }\n\n  close() {\n    this.socket.close();\n  }\n\n  connect() {\n    if (this.socket) {\n      delete this.socket;\n    }\n\n    this.connecting = true;\n\n    this.socket = new WebSocket(...this.args);\n\n    if (this.options.retry) {\n      this.socket.addEventListener('close', (event) => {\n        if (ignoreCodes.includes(event.code)) {\n          return;\n        }\n\n        if (!this.retrying) {\n          warn(`The WebSocket was closed and will attempt to reconnect`);\n        }\n\n        this.reconnect();\n      });\n    } else {\n      this.socket.onclose = () => warn(`The client WebSocket was closed. ${refresh}`);\n    }\n\n    this.socket.addEventListener('open', () => {\n      this.attempts = 0;\n      this.retrying = false;\n    });\n\n    if (this.eventHandlers.length) {\n      for (const [name, fn] of this.eventHandlers) {\n        this.socket.addEventListener(name, fn);\n      }\n    }\n  }\n\n  reconnect() {\n    this.attempts += 1;\n    this.retrying = true;\n\n    if (this.attempts > maxAttempts) {\n      error(`The WebSocket could not be reconnected. ${refresh}`);\n      this.retrying = false;\n      return;\n    }\n\n    const timeout = 1000 * this.attempts ** 2;\n\n    setTimeout(() => this.connect(this.args), timeout);\n  }\n\n  removeEventListener(...args) {\n    const [, handler] = args;\n    this.eventHandlers = this.eventHandlers.filter(([, fn]) => fn === handler);\n    this.socket.removeEventListener(...args);\n  }\n}\n\nmodule.exports = { ClientSocket };\n\n\n//# sourceURL=webpack://food-festival/./node_modules/webpack-plugin-serve/lib/client/ClientSocket.js?");
+
+/***/ }),
+
+/***/ "./node_modules/webpack-plugin-serve/lib/client/client.js":
+/*!****************************************************************!*
+  !*** ./node_modules/webpack-plugin-serve/lib/client/client.js ***!
+  \****************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("/*\n  Copyright © 2018 Andrew Powell\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\n  The above copyright notice and this permission notice shall be\n  included in all copies or substantial portions of this Source Code Form.\n*/\n/* eslint-disable global-require */\nconst run = (buildHash, options) => {\n  const { address, client = {}, progress, secure, status } = options;\n\n  options.firstInstance = !window.webpackPluginServe; // eslint-disable-line no-param-reassign\n\n  window.webpackPluginServe = window.webpackPluginServe || {\n    compilers: {}\n  };\n  window.webpackPluginServe.silent = !!client.silent;\n\n  const { ClientSocket } = __webpack_require__(/*! ./ClientSocket */ \"./node_modules/webpack-plugin-serve/lib/client/ClientSocket.js\");\n  const { replace } = __webpack_require__(/*! ./hmr */ \"./node_modules/webpack-plugin-serve/lib/client/hmr.js\");\n  const { error, info, warn } = __webpack_require__(/*! ./log */ \"./node_modules/webpack-plugin-serve/lib/client/log.js\")();\n\n  const protocol = secure ? 'wss' : 'ws';\n  const socket = new ClientSocket(client, `${protocol}://${client.address || address}/wps`);\n\n  const { compilerName } = options;\n\n  window.webpackPluginServe.compilers[compilerName] = {};\n\n  // prevents ECONNRESET errors on the server\n  window.addEventListener('beforeunload', () => socket.close());\n\n  socket.addEventListener('message', (message) => {\n    const { action, data = {} } = JSON.parse(message.data);\n    const { errors, hash = '<?>', warnings } = data || {};\n    const shortHash = hash.slice(0, 7);\n    const identifier = options.compilerName ? `(Compiler: ${options.compilerName}) ` : '';\n    const compiler = window.webpackPluginServe.compilers[compilerName];\n    const { wpsId } = data;\n\n    switch (action) {\n      case 'build':\n        compiler.done = false;\n        break;\n      case 'connected':\n        info(`WebSocket connected ${identifier}`);\n        break;\n      case 'done':\n        compiler.done = true;\n        break;\n      case 'problems':\n        if (data.errors.length) {\n          error(`${identifier}Build ${shortHash} produced errors:\\n`, errors);\n        }\n        if (data.warnings.length) {\n          warn(`${identifier}Build ${shortHash} produced warnings:\\n`, warnings);\n        }\n        break;\n      case 'reload':\n        window.location.reload();\n        break;\n      case 'replace':\n        // actions with a wpsId in tow indicate actions that should only be executed when the wpsId sent\n        // matches the wpsId set in options. this is how we can identify multiple compilers in the\n        // client.\n        if (wpsId && wpsId === options.wpsId) {\n          replace(buildHash, hash);\n        }\n        break;\n      default:\n    }\n  });\n\n  if (options.firstInstance) {\n    if (progress === 'minimal') {\n      const { init } = __webpack_require__(/*! ./overlays/progress-minimal */ \"./node_modules/webpack-plugin-serve/lib/client/overlays/progress-minimal.js\");\n      init(options, socket);\n    } else if (progress) {\n      const { init } = __webpack_require__(/*! ./overlays/progress */ \"./node_modules/webpack-plugin-serve/lib/client/overlays/progress.js\");\n      init(options, socket);\n    }\n\n    if (status) {\n      const { init } = __webpack_require__(/*! ./overlays/status */ \"./node_modules/webpack-plugin-serve/lib/client/overlays/status.js\");\n      init(options, socket);\n    }\n\n    if (true) {\n      info('Hot Module Replacement is active');\n\n      if (options.liveReload) {\n        info('Live Reload taking precedence over Hot Module Replacement');\n      }\n    } else {}\n\n    if (false) {}\n  }\n};\n\nmodule.exports = { run };\n\n\n//# sourceURL=webpack://food-festival/./node_modules/webpack-plugin-serve/lib/client/client.js?");
+
+/***/ }),
+
+/***/ "./node_modules/webpack-plugin-serve/lib/client/hmr.js":
+/*!*************************************************************!*
+  !*** ./node_modules/webpack-plugin-serve/lib/client/hmr.js ***!
+  \*************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("/*\n  Copyright © 2018 Andrew Powell\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\n  The above copyright notice and this permission notice shall be\n  included in all copies or substantial portions of this Source Code Form.\n*/\nconst { error, info, refresh, warn } = __webpack_require__(/*! ./log */ \"./node_modules/webpack-plugin-serve/lib/client/log.js\")();\n\nlet latest = true;\n\nconst hmr = {\n  onUnaccepted(data) {\n    warn('Change in unaccepted module(s):\\n', data);\n    warn(data);\n  },\n  onDeclined(data) {\n    warn('Change in declined module(s):\\n', data);\n  },\n  onErrored(data) {\n    error('Error in module(s):\\n', data);\n  }\n};\n\nconst replace = async (buildHash, hash) => {\n  const { apply, check, status } = module.hot;\n\n  if (hash) {\n    // eslint-disable-next-line no-undef\n    latest = hash.includes(buildHash);\n  }\n\n  if (!latest) {\n    const hmrStatus = status();\n\n    if (hmrStatus === 'abort' || hmrStatus === 'fail') {\n      warn(`An HMR update was triggered, but ${hmrStatus}ed. ${refresh}`);\n      return;\n    }\n\n    let modules;\n\n    try {\n      modules = await check(false);\n    } catch (e) {\n      // noop. this typically happens when a MultiCompiler has more than one compiler that includes\n      // this script, and an update happens with a hash that isn't part of the compiler/module this\n      // instance was loaded for.\n      return;\n    }\n\n    if (!modules) {\n      warn(`No modules found for replacement. ${refresh}`);\n      return;\n    }\n\n    modules = await apply(hmr);\n\n    if (modules) {\n      latest = true;\n      info(`Build ${hash.slice(0, 7)} replaced:\\n`, modules);\n    }\n  }\n};\n\nmodule.exports = { replace };\n\n\n//# sourceURL=webpack://food-festival/./node_modules/webpack-plugin-serve/lib/client/hmr.js?");
+
+/***/ }),
+
+/***/ "./node_modules/webpack-plugin-serve/lib/client/log.js":
+/*!*************************************************************!*
+  !*** ./node_modules/webpack-plugin-serve/lib/client/log.js ***!
+  \*************************************************************/
+/***/ ((module) => {
+
+eval("/*\n  Copyright © 2018 Andrew Powell\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\n  The above copyright notice and this permission notice shall be\n  included in all copies or substantial portions of this Source Code Form.\n*/\nconst { error, info, warn } = console;\nconst log = {\n  error: error.bind(console, '⬡ wps:'),\n  info: info.bind(console, '⬡ wps:'),\n  refresh: 'Please refresh the page',\n  warn: warn.bind(console, '⬡ wps:')\n};\nconst noop = () => {};\nconst silent = {\n  error: noop,\n  info: noop,\n  warn: noop\n};\n\nmodule.exports = () => (window.webpackPluginServe.silent ? silent : log);\n\n\n//# sourceURL=webpack://food-festival/./node_modules/webpack-plugin-serve/lib/client/log.js?");
+
+/***/ }),
+
+/***/ "./node_modules/webpack-plugin-serve/lib/client/overlays/progress-minimal.js":
+/*!***********************************************************************************!*
+  !*** ./node_modules/webpack-plugin-serve/lib/client/overlays/progress-minimal.js ***!
+  \***********************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("/*\n  Copyright © 2018 Andrew Powell, Matheus Gonçalves da Silva\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\n  The above copyright notice and this permission notice shall be\n  included in all copies or substantial portions of this Source Code Form.\n*/\nconst { addCss, addHtml } = __webpack_require__(/*! ./util */ \"./node_modules/webpack-plugin-serve/lib/client/overlays/util.js\");\n\nconst ns = 'wps-progress-minimal';\nconst html = `\n<div id=\"${ns}\" class=\"${ns}-hidden\">\n  <div id=\"${ns}-bar\"></div>\n</div>\n`;\nconst css = `\n#${ns} {\n  position: absolute;\n  top: 0;\n  left: 0;\n  height: 4px;\n  width: 100vw;\n  z-index: 2147483645;\n}\n\n#${ns}-bar {\n  width: 0%;\n  height: 4px;\n  background-color: rgb(186, 223, 172);\n  transition: width 1s ease-in-out;\n}\n\n.${ns}-hidden{\n  display: none;\n}\n`;\n\nconst update = (percent) => {\n  const bar = document.querySelector(`#${ns}-bar`);\n  bar.style.width = `${percent}%`;\n};\n\nconst reset = (wrapper) => {\n  wrapper.classList.add(`${ns}-hidden`);\n  setTimeout(() => update(0), 1e3);\n};\n\nconst init = (options, socket) => {\n  if (options.firstInstance) {\n    document.addEventListener('DOMContentLoaded', () => {\n      addCss(css);\n      addHtml(html);\n    });\n  }\n\n  socket.addEventListener('message', (message) => {\n    const { action, data } = JSON.parse(message.data);\n\n    if (action !== 'progress') {\n      return;\n    }\n\n    const percent = Math.floor(data.percent * 100);\n    const wrapper = document.querySelector(`#${ns}`);\n\n    wrapper.classList.remove(`${ns}-hidden`);\n\n    if (data.percent === 1) {\n      setTimeout(() => reset(wrapper), 5e3);\n    }\n\n    update(percent);\n  });\n};\n\nmodule.exports = {\n  init\n};\n\n\n//# sourceURL=webpack://food-festival/./node_modules/webpack-plugin-serve/lib/client/overlays/progress-minimal.js?");
+
+/***/ }),
+
+/***/ "./node_modules/webpack-plugin-serve/lib/client/overlays/progress.js":
+/*!***************************************************************************!*
+  !*** ./node_modules/webpack-plugin-serve/lib/client/overlays/progress.js ***!
+  \***************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("/*\n  Copyright © 2018 Andrew Powell, Matheus Gonçalves da Silva\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\n  The above copyright notice and this permission notice shall be\n  included in all copies or substantial portions of this Source Code Form.\n*/\nconst { addCss, addHtml } = __webpack_require__(/*! ./util */ \"./node_modules/webpack-plugin-serve/lib/client/overlays/util.js\");\n\nconst ns = 'wps-progress';\nconst css = `\n@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');\n\n#${ns}{\n  width: 200px;\n  height: 200px;\n  position: absolute;\n  right: 5%;\n  top: 5%;\n  transition: opacity .25s ease-in-out;\n  z-index: 2147483645;\n}\n\n#${ns}-bg {\n  fill: #282d35;\n}\n\n#${ns}-fill {\n  fill: rgba(0, 0, 0, 0);\n  stroke: rgb(186, 223, 172);\n  stroke-dasharray: 219.99078369140625;\n  stroke-dashoffset: -219.99078369140625;\n  stroke-width: 10;\n  transform: rotate(90deg)translate(0px, -80px);\n  transition: stroke-dashoffset 1s;\n}\n\n#${ns}-percent {\n  font-family: 'Open Sans';\n  font-size: 18px;\n  fill: #ffffff;\n}\n\n#${ns}-percent-value {\n  dominant-baseline: middle;\n  text-anchor: middle;\n}\n\n#${ns}-percent-super {\n  fill: #bdc3c7;\n  font-size: .45em;\n  baseline-shift: 10%;\n}\n\n.${ns}-noselect {\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  cursor: default;\n}\n\n@keyframes ${ns}-hidden-display {\n\t0% {\n\t\topacity: 1;\n\t\ttransform: scale(1);\n\t\t-webkit-transform: scale(1);\n\t}\n\t99% {\n\t\tdisplay: inline-flex;\n\t\topacity: 0;\n\t\ttransform: scale(0);\n\t\t-webkit-transform: scale(0);\n\t}\n\t100% {\n\t\tdisplay: none;\n\t\topacity: 0;\n\t\ttransform: scale(0);\n\t\t-webkit-transform: scale(0);\n\t}\n}\n\n.${ns}-hidden {\n  animation: ${ns}-hidden-display .3s;\n  animation-fill-mode:forwards;\n  display: inline-flex;\n}\n\n.${ns}-hidden-onload {\n  display: none;\n}\n`;\n\nconst html = `\n<svg id=\"${ns}\" class=\"${ns}-noselect ${ns}-hidden-onload\" x=\"0px\" y=\"0px\" viewBox=\"0 0 80 80\">\n  <circle id=\"${ns}-bg\" cx=\"50%\" cy=\"50%\" r=\"35\"></circle>\n  <path id=\"${ns}-fill\" d=\"M5,40a35,35 0 1,0 70,0a35,35 0 1,0 -70,0\" />\n  <text id=\"${ns}-percent\" x=\"50%\" y=\"51%\"><tspan id=\"${ns}-percent-value\">0</tspan><tspan id=\"${ns}-percent-super\">%</tspan></text>\n</svg>\n`;\n\nconst update = (percent) => {\n  const max = -219.99078369140625;\n  const value = document.querySelector(`#${ns}-percent-value`);\n  const track = document.querySelector(`#${ns}-fill`);\n  const offset = ((100 - percent) / 100) * max;\n\n  track.setAttribute('style', `stroke-dashoffset: ${offset}`);\n  value.innerHTML = percent.toString();\n};\n\nconst reset = (svg) => {\n  svg.classList.add(`${ns}-hidden`);\n  setTimeout(() => update(0), 1e3);\n};\n\nconst init = (options, socket) => {\n  if (options.firstInstance) {\n    document.addEventListener('DOMContentLoaded', () => {\n      addCss(css);\n      addHtml(html);\n    });\n  }\n\n  socket.addEventListener('message', (message) => {\n    const { action, data } = JSON.parse(message.data);\n\n    if (action !== 'progress') {\n      return;\n    }\n\n    const percent = Math.floor(data.percent * 100);\n    const svg = document.querySelector(`#${ns}`);\n\n    if (!svg) {\n      return;\n    }\n\n    // we can safely call this even if it doesn't have the class\n    svg.classList.remove(`${ns}-hidden`, `${ns}-hidden-onload`);\n\n    if (data.percent === 1) {\n      setTimeout(() => reset(svg), 5e3);\n    }\n\n    update(percent);\n  });\n};\n\nmodule.exports = { init };\n\n\n//# sourceURL=webpack://food-festival/./node_modules/webpack-plugin-serve/lib/client/overlays/progress.js?");
+
+/***/ }),
+
+/***/ "./node_modules/webpack-plugin-serve/lib/client/overlays/status.js":
+/*!*************************************************************************!*
+  !*** ./node_modules/webpack-plugin-serve/lib/client/overlays/status.js ***!
+  \*************************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("/*\n  Copyright © 2018 Andrew Powell\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\n  The above copyright notice and this permission notice shall be\n  included in all copies or substantial portions of this Source Code Form.\n*/\nconst { addCss, addHtml, socketMessage } = __webpack_require__(/*! ./util */ \"./node_modules/webpack-plugin-serve/lib/client/overlays/util.js\");\n\nconst ns = 'wps-status';\nconst css = `\n@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');\n\n#${ns} {\n  background: #282d35;\n  border-radius: 0.6em;\n  display: flex;\n  flex-direction: column;\n\tfont-family: 'Open Sans', Helvetica, Arial, sans-serif;\n\tfont-size: 10px;\n  height: 90%;\n  min-height: 20em;\n  left: 50%;\n  opacity: 1;\n  overflow: hidden;\n  padding-bottom: 3em;\n  position: absolute;\n  top: 2rem;\n  transform: translateX(-50%);\n  transition: opacity .25s ease-in-out;\n  width: 95%;\n  z-index: 2147483645;\n}\n\n@keyframes ${ns}-hidden-display {\n\t0% {\n\t\topacity: 1;\n\t}\n\t99% {\n\t\tdisplay: inline-flex;\n\t\topacity: 0;\n\t}\n\t100% {\n\t\tdisplay: none;\n\t\topacity: 0;\n\t}\n}\n\n#${ns}.${ns}-hidden {\n  animation: ${ns}-hidden-display .3s;\n  animation-fill-mode:forwards;\n  display: none;\n}\n\n#${ns}.${ns}-min {\n  animation: minimize 10s;\n  bottom: 2em;\n  cursor: pointer;\n  height: 6em;\n  left: auto;\n  min-height: 6em;\n  padding-bottom: 0;\n  position: absolute;\n  right: 2em;\n  top: auto;\n  transform: none;\n  width: 6em;\n}\n\n#${ns}.${ns}-min #${ns}-beacon {\n  display: block;\n}\n\n#${ns}-title {\n  color: #fff;\n  font-size: 1.2em;\n  font-weight: normal;\n  margin: 0;\n  padding: 0.6em 0;\n  text-align: center;\n  width: 100%;\n}\n\n#${ns}.${ns}-min #${ns}-title {\n  display: none;\n}\n\n#${ns}-title-errors {\n  color: #ff5f58;\n  font-style: normal;\n  padding-left: 1em;\n}\n\n#${ns}-title-warnings {\n  color: #ffbd2e;\n  font-style: normal;\n  padding-left: 1em;\n}\n\n#${ns}-problems {\n  overflow-y: auto;\n  padding: 1em 2em;\n}\n\n#${ns}-problems pre {\n  color: #ddd;\n  background: #282d35;\n  display: block;\n  font-size: 1.3em;\n\tfont-family: 'Open Sans', Helvetica, Arial, sans-serif;\n  white-space: pre-wrap;\n}\n\n#${ns}-problems pre em {\n  background: #ff5f58;\n  border-radius: 0.3em;\n  color: #641e16;\n  font-style: normal;\n  line-height: 3em;\n  margin-right: 0.4em;\n  padding: 0.1em 0.4em;\n  text-transform: uppercase;\n}\n\npre#${ns}-warnings em {\n  background: #ffbd2e;\n  color: #3e2723;\n}\n\npre#${ns}-success {\n  display: none;\n  text-align: center;\n}\n\npre#${ns}-success em {\n  background: #7fb900;\n  color: #004d40;\n}\n\n#${ns}-problems.${ns}-success #${ns}-success {\n  display: block;\n}\n\n#${ns}.${ns}-min #${ns}-problems {\n  display: none;\n}\n\n#${ns}-nav {\n  opacity: 0.5;\n  padding: 1.2em;\n  position: absolute;\n}\n\n#${ns}.${ns}-min #${ns}-nav {\n  display: none;\n}\n\n#${ns}-nav:hover {\n  opacity: 1;\n}\n\n#${ns}-nav div {\n  background: #ff5f58;\n  border-radius: 1.2em;\n  cursor: pointer;\n  display: inline-block;\n  height: 1.2em;\n  position: relative;\n  width: 1.2em;\n}\n\ndiv#${ns}-min {\n  background: #ffbd2e;\n  margin-left: 0.8em;\n}\n\n#${ns}-beacon {\n  border-radius: 3em;\n  display: none;\n  font-size: 10px;\n  height: 3em;\n  margin: 1.6em auto;\n  position: relative;\n  width: 3em;\n}\n\n#${ns}-beacon:before, #${ns}-beacon:after {\n  content: '';\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background: rgba(127,185,0, 0.2);\n  border-radius: 3em;\n  opacity: 0;\n}\n\n#${ns}-beacon:before {\n  animation: ${ns}-pulse 3s infinite linear;\n  transform: scale(1);\n}\n\n#${ns}-beacon:after {\n  animation: ${ns}-pulse 3s 2s infinite linear;\n}\n\n\n@keyframes ${ns}-pulse {\n  0% {\n    opacity: 0;\n    transform: scale(0.6);\n  }\n  33% {\n    opacity: 1;\n    transform: scale(1);\n  }\n  100% {\n    opacity: 0;\n    transform: scale(1.4);\n  }\n}\n\n#${ns}-beacon mark {\n  background: rgba(127, 185, 0, 1);\n  border-radius: 100% 100%;\n  height: 1em;\n  left: 1em;\n  position: absolute;\n  top: 1em;\n  width: 1em;\n}\n\n#${ns}-beacon.${ns}-error mark {\n  background: #ff5f58;\n}\n\n#${ns}-beacon.${ns}-error:before, #${ns}-beacon.error:after {\n  background: rgba(255, 95, 88, 0.2);\n}\n\n#${ns}-beacon.${ns}-warning mark {\n  background: #ffbd2e;\n}\n\n#${ns}-beacon.${ns}-warning:before, #${ns}-beacon.warning:after {\n  background: rgba(255, 189, 46, 0.2);\n}\n`;\n\nconst html = `\n<aside id=\"${ns}\" class=\"${ns}-hidden\" title=\"build status\">\n  <figure id=\"${ns}-beacon\">\n    <mark/>\n  </figure>\n  <nav id=\"${ns}-nav\">\n    <div id=\"${ns}-close\" title=\"close\"></div>\n    <div id=\"${ns}-min\" title=\"minmize\"></div>\n  </nav>\n  <h1 id=\"${ns}-title\">\n    build status\n    <em id=\"${ns}-title-errors\"></em>\n    <em id=\"${ns}-title-warnings\"></em>\n  </h1>\n  <article id=\"${ns}-problems\">\n    <pre id=\"${ns}-success\"><em>Build Successful</em></pre>\n    <pre id=\"${ns}-errors\"></pre>\n    <pre id=\"${ns}-warnings\"></pre>\n  </article>\n</aside>\n`;\n\nconst init = (options, socket) => {\n  const hidden = `${ns}-hidden`;\n  let hasProblems = false;\n  let aside;\n  let beacon;\n  let problems;\n  let preErrors;\n  let preWarnings;\n  let titleErrors;\n  let titleWarnings;\n\n  const reset = () => {\n    preErrors.innerHTML = '';\n    preWarnings.innerHTML = '';\n    problems.classList.remove(`${ns}-success`);\n    beacon.className = '';\n    titleErrors.innerText = '';\n    titleWarnings.innerText = '';\n  };\n\n  const addErrors = (errors) => {\n    if (errors.length) {\n      problems.classList.remove(`${ns}-success`);\n      beacon.classList.add(`${ns}-error`);\n\n      for (const error of errors) {\n        const markup = `<div><em>Error</em> in ${error}</div>`;\n        addHtml(markup, preErrors);\n      }\n\n      titleErrors.innerText = `${errors.length} Error(s)`;\n    } else {\n      titleErrors.innerText = '';\n    }\n    aside.classList.remove(hidden);\n  };\n\n  const addWarnings = (warnings) => {\n    if (warnings.length) {\n      problems.classList.remove(`${ns}-success`);\n\n      if (!beacon.classList.contains(`${ns}-error`)) {\n        beacon.classList.add(`${ns}-warning`);\n      }\n\n      for (const warning of warnings) {\n        const markup = `<div><em>Warning</em> in ${warning}</div>`;\n        addHtml(markup, preWarnings);\n      }\n\n      titleWarnings.innerText = `${warnings.length} Warning(s)`;\n    } else {\n      titleWarnings.innerText = '';\n    }\n\n    aside.classList.remove(hidden);\n  };\n\n  if (options.firstInstance) {\n    document.addEventListener('DOMContentLoaded', () => {\n      addCss(css);\n      [aside] = addHtml(html);\n      beacon = document.querySelector(`#${ns}-beacon`);\n      problems = document.querySelector(`#${ns}-problems`);\n      preErrors = document.querySelector(`#${ns}-errors`);\n      preWarnings = document.querySelector(`#${ns}-warnings`);\n      titleErrors = document.querySelector(`#${ns}-title-errors`);\n      titleWarnings = document.querySelector(`#${ns}-title-warnings`);\n\n      const close = document.querySelector(`#${ns}-close`);\n      const min = document.querySelector(`#${ns}-min`);\n\n      aside.addEventListener('click', () => {\n        aside.classList.remove(`${ns}-min`);\n      });\n\n      close.addEventListener('click', () => {\n        aside.classList.add(`${ns}-hidden`);\n      });\n\n      min.addEventListener('click', (e) => {\n        aside.classList.add(`${ns}-min`);\n        e.stopImmediatePropagation();\n      });\n    });\n  }\n\n  socketMessage(socket, (action, data) => {\n    if (!aside) {\n      return;\n    }\n\n    const { compilers } = window.webpackPluginServe;\n\n    switch (action) {\n      case 'build':\n        // clear errors and warnings when a new build begins\n        reset();\n        break;\n      case 'problems':\n        addErrors(data.errors);\n        addWarnings(data.warnings);\n        aside.classList.remove(hidden);\n        hasProblems = data.errors.length || data.warnings.length;\n        break;\n      case 'replace':\n        // if there's a compiler that isn't done yet, hold off and let it run the show\n        for (const compilerName of Object.keys(compilers)) {\n          if (!compilers[compilerName]) {\n            return;\n          }\n        }\n\n        if (hasProblems && !preErrors.children.length && !preWarnings.children.length) {\n          reset();\n          hasProblems = false;\n          problems.classList.add(`${ns}-success`);\n          aside.classList.remove(hidden);\n\n          setTimeout(() => aside.classList.add(hidden), 3e3);\n        }\n        break;\n      default:\n    }\n  });\n};\n\nmodule.exports = { init };\n\n\n//# sourceURL=webpack://food-festival/./node_modules/webpack-plugin-serve/lib/client/overlays/status.js?");
+
+/***/ }),
+
+/***/ "./node_modules/webpack-plugin-serve/lib/client/overlays/util.js":
+/*!***********************************************************************!*
+  !*** ./node_modules/webpack-plugin-serve/lib/client/overlays/util.js ***!
+  \***********************************************************************/
+/***/ ((module) => {
+
+eval("/*\n  Copyright © 2018 Andrew Powell\n\n  This Source Code Form is subject to the terms of the Mozilla Public\n  License, v. 2.0. If a copy of the MPL was not distributed with this\n  file, You can obtain one at http://mozilla.org/MPL/2.0/.\n\n  The above copyright notice and this permission notice shall be\n  included in all copies or substantial portions of this Source Code Form.\n*/\nconst addHtml = (html, parent) => {\n  const div = document.createElement('div');\n  const nodes = [];\n\n  div.innerHTML = html.trim();\n\n  while (div.firstChild) {\n    nodes.push((parent || document.body).appendChild(div.firstChild));\n  }\n\n  return nodes;\n};\n\nconst addCss = (css) => {\n  const style = document.createElement('style');\n\n  style.type = 'text/css';\n\n  if (css.styleSheet) {\n    style.styleSheet.cssText = css;\n  } else {\n    style.appendChild(document.createTextNode(css));\n  }\n\n  // append the stylesheet for the svg\n  document.head.appendChild(style);\n};\n\nconst socketMessage = (socket, handler) => {\n  socket.addEventListener('message', (message) => {\n    const { action, data = {} } = JSON.parse(message.data);\n    handler(action, data);\n  });\n};\n\nmodule.exports = { addCss, addHtml, socketMessage };\n\n\n//# sourceURL=webpack://food-festival/./node_modules/webpack-plugin-serve/lib/client/overlays/util.js?");
+
 /***/ })
 
 /******/ 	});
@@ -81,11 +181,23 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		var execOptions = { id: moduleId, module: module, factory: __webpack_modules__[moduleId], require: __webpack_require__ };
+/******/ 		__webpack_require__.i.forEach(function(handler) { handler(execOptions); });
+/******/ 		module = execOptions.module;
+/******/ 		execOptions.factory.call(module.exports, module, module.exports, execOptions.require);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = __webpack_module_cache__;
+/******/ 	
+/******/ 	// expose the module execution interceptor
+/******/ 	__webpack_require__.i = [];
 /******/ 	
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
@@ -98,6 +210,25 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 				}
 /******/ 			}
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get javascript update chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference all chunks
+/******/ 		__webpack_require__.hu = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return "8202411-" + chunkId + "-wps-hmr.js";
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get update manifest filename */
+/******/ 	(() => {
+/******/ 		__webpack_require__.hmrF = () => "8202411-wps-hmr.json";
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/getFullHash */
+/******/ 	(() => {
+/******/ 		__webpack_require__.h = () => "ab188afa4dbb300d4351"
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
@@ -117,6 +248,52 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/load script */
+/******/ 	(() => {
+/******/ 		var inProgress = {};
+/******/ 		var dataWebpackPrefix = "food-festival:";
+/******/ 		// loadScript function to load a script via script tag
+/******/ 		__webpack_require__.l = (url, done, key) => {
+/******/ 			if(inProgress[url]) { inProgress[url].push(done); return; }
+/******/ 			var script, needAttach;
+/******/ 			if(key !== undefined) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				for(var i = 0; i < scripts.length; i++) {
+/******/ 					var s = scripts[i];
+/******/ 					if(s.getAttribute("src") == url || s.getAttribute("data-webpack") == dataWebpackPrefix + key) { script = s; break; }
+/******/ 				}
+/******/ 			}
+/******/ 			if(!script) {
+/******/ 				needAttach = true;
+/******/ 				script = document.createElement('script');
+/******/ 		
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.setAttribute("data-webpack", dataWebpackPrefix + key);
+/******/ 				script.src = url;
+/******/ 			}
+/******/ 			inProgress[url] = [done];
+/******/ 			var onScriptComplete = (prev, event) => {
+/******/ 				// avoid mem leaks in IE.
+/******/ 				script.onerror = script.onload = null;
+/******/ 				clearTimeout(timeout);
+/******/ 				var doneFns = inProgress[url];
+/******/ 				delete inProgress[url];
+/******/ 				script.parentNode && script.parentNode.removeChild(script);
+/******/ 				doneFns && doneFns.forEach((fn) => fn(event));
+/******/ 				if(prev) return prev(event);
+/******/ 			}
+/******/ 			;
+/******/ 			var timeout = setTimeout(onScriptComplete.bind(null, undefined, { type: 'timeout', target: script }), 120000);
+/******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
+/******/ 			script.onload = onScriptComplete.bind(null, script.onload);
+/******/ 			needAttach && document.head.appendChild(script);
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -128,13 +305,877 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/hot module replacement */
+/******/ 	(() => {
+/******/ 		var currentModuleData = {};
+/******/ 		var installedModules = __webpack_require__.c;
+/******/ 		
+/******/ 		// module and require creation
+/******/ 		var currentChildModule;
+/******/ 		var currentParents = [];
+/******/ 		
+/******/ 		// status
+/******/ 		var registeredStatusHandlers = [];
+/******/ 		var currentStatus = "idle";
+/******/ 		
+/******/ 		// while downloading
+/******/ 		var blockingPromises;
+/******/ 		
+/******/ 		// The update info
+/******/ 		var currentUpdateApplyHandlers;
+/******/ 		var queuedInvalidatedModules;
+/******/ 		
+/******/ 		// eslint-disable-next-line no-unused-vars
+/******/ 		__webpack_require__.hmrD = currentModuleData;
+/******/ 		
+/******/ 		__webpack_require__.i.push(function (options) {
+/******/ 			var module = options.module;
+/******/ 			var require = createRequire(options.require, options.id);
+/******/ 			module.hot = createModuleHotObject(options.id, module);
+/******/ 			module.parents = currentParents;
+/******/ 			module.children = [];
+/******/ 			currentParents = [];
+/******/ 			options.require = require;
+/******/ 		});
+/******/ 		
+/******/ 		__webpack_require__.hmrC = {};
+/******/ 		__webpack_require__.hmrI = {};
+/******/ 		
+/******/ 		function createRequire(require, moduleId) {
+/******/ 			var me = installedModules[moduleId];
+/******/ 			if (!me) return require;
+/******/ 			var fn = function (request) {
+/******/ 				if (me.hot.active) {
+/******/ 					if (installedModules[request]) {
+/******/ 						var parents = installedModules[request].parents;
+/******/ 						if (parents.indexOf(moduleId) === -1) {
+/******/ 							parents.push(moduleId);
+/******/ 						}
+/******/ 					} else {
+/******/ 						currentParents = [moduleId];
+/******/ 						currentChildModule = request;
+/******/ 					}
+/******/ 					if (me.children.indexOf(request) === -1) {
+/******/ 						me.children.push(request);
+/******/ 					}
+/******/ 				} else {
+/******/ 					console.warn(
+/******/ 						"[HMR] unexpected require(" +
+/******/ 							request +
+/******/ 							") from disposed module " +
+/******/ 							moduleId
+/******/ 					);
+/******/ 					currentParents = [];
+/******/ 				}
+/******/ 				return require(request);
+/******/ 			};
+/******/ 			var createPropertyDescriptor = function (name) {
+/******/ 				return {
+/******/ 					configurable: true,
+/******/ 					enumerable: true,
+/******/ 					get: function () {
+/******/ 						return require[name];
+/******/ 					},
+/******/ 					set: function (value) {
+/******/ 						require[name] = value;
+/******/ 					}
+/******/ 				};
+/******/ 			};
+/******/ 			for (var name in require) {
+/******/ 				if (Object.prototype.hasOwnProperty.call(require, name) && name !== "e") {
+/******/ 					Object.defineProperty(fn, name, createPropertyDescriptor(name));
+/******/ 				}
+/******/ 			}
+/******/ 			fn.e = function (chunkId) {
+/******/ 				return trackBlockingPromise(require.e(chunkId));
+/******/ 			};
+/******/ 			return fn;
+/******/ 		}
+/******/ 		
+/******/ 		function createModuleHotObject(moduleId, me) {
+/******/ 			var hot = {
+/******/ 				// private stuff
+/******/ 				_acceptedDependencies: {},
+/******/ 				_declinedDependencies: {},
+/******/ 				_selfAccepted: false,
+/******/ 				_selfDeclined: false,
+/******/ 				_selfInvalidated: false,
+/******/ 				_disposeHandlers: [],
+/******/ 				_main: currentChildModule !== moduleId,
+/******/ 				_requireSelf: function () {
+/******/ 					currentParents = me.parents.slice();
+/******/ 					currentChildModule = moduleId;
+/******/ 					__webpack_require__(moduleId);
+/******/ 				},
+/******/ 		
+/******/ 				// Module API
+/******/ 				active: true,
+/******/ 				accept: function (dep, callback) {
+/******/ 					if (dep === undefined) hot._selfAccepted = true;
+/******/ 					else if (typeof dep === "function") hot._selfAccepted = dep;
+/******/ 					else if (typeof dep === "object" && dep !== null)
+/******/ 						for (var i = 0; i < dep.length; i++)
+/******/ 							hot._acceptedDependencies[dep[i]] = callback || function () {};
+/******/ 					else hot._acceptedDependencies[dep] = callback || function () {};
+/******/ 				},
+/******/ 				decline: function (dep) {
+/******/ 					if (dep === undefined) hot._selfDeclined = true;
+/******/ 					else if (typeof dep === "object" && dep !== null)
+/******/ 						for (var i = 0; i < dep.length; i++)
+/******/ 							hot._declinedDependencies[dep[i]] = true;
+/******/ 					else hot._declinedDependencies[dep] = true;
+/******/ 				},
+/******/ 				dispose: function (callback) {
+/******/ 					hot._disposeHandlers.push(callback);
+/******/ 				},
+/******/ 				addDisposeHandler: function (callback) {
+/******/ 					hot._disposeHandlers.push(callback);
+/******/ 				},
+/******/ 				removeDisposeHandler: function (callback) {
+/******/ 					var idx = hot._disposeHandlers.indexOf(callback);
+/******/ 					if (idx >= 0) hot._disposeHandlers.splice(idx, 1);
+/******/ 				},
+/******/ 				invalidate: function () {
+/******/ 					this._selfInvalidated = true;
+/******/ 					switch (currentStatus) {
+/******/ 						case "idle":
+/******/ 							currentUpdateApplyHandlers = [];
+/******/ 							Object.keys(__webpack_require__.hmrI).forEach(function (key) {
+/******/ 								__webpack_require__.hmrI[key](
+/******/ 									moduleId,
+/******/ 									currentUpdateApplyHandlers
+/******/ 								);
+/******/ 							});
+/******/ 							setStatus("ready");
+/******/ 							break;
+/******/ 						case "ready":
+/******/ 							Object.keys(__webpack_require__.hmrI).forEach(function (key) {
+/******/ 								__webpack_require__.hmrI[key](
+/******/ 									moduleId,
+/******/ 									currentUpdateApplyHandlers
+/******/ 								);
+/******/ 							});
+/******/ 							break;
+/******/ 						case "prepare":
+/******/ 						case "check":
+/******/ 						case "dispose":
+/******/ 						case "apply":
+/******/ 							(queuedInvalidatedModules = queuedInvalidatedModules || []).push(
+/******/ 								moduleId
+/******/ 							);
+/******/ 							break;
+/******/ 						default:
+/******/ 							// ignore requests in error states
+/******/ 							break;
+/******/ 					}
+/******/ 				},
+/******/ 		
+/******/ 				// Management API
+/******/ 				check: hotCheck,
+/******/ 				apply: hotApply,
+/******/ 				status: function (l) {
+/******/ 					if (!l) return currentStatus;
+/******/ 					registeredStatusHandlers.push(l);
+/******/ 				},
+/******/ 				addStatusHandler: function (l) {
+/******/ 					registeredStatusHandlers.push(l);
+/******/ 				},
+/******/ 				removeStatusHandler: function (l) {
+/******/ 					var idx = registeredStatusHandlers.indexOf(l);
+/******/ 					if (idx >= 0) registeredStatusHandlers.splice(idx, 1);
+/******/ 				},
+/******/ 		
+/******/ 				//inherit from previous dispose call
+/******/ 				data: currentModuleData[moduleId]
+/******/ 			};
+/******/ 			currentChildModule = undefined;
+/******/ 			return hot;
+/******/ 		}
+/******/ 		
+/******/ 		function setStatus(newStatus) {
+/******/ 			currentStatus = newStatus;
+/******/ 			for (var i = 0; i < registeredStatusHandlers.length; i++)
+/******/ 				registeredStatusHandlers[i].call(null, newStatus);
+/******/ 		}
+/******/ 		
+/******/ 		function trackBlockingPromise(promise) {
+/******/ 			switch (currentStatus) {
+/******/ 				case "ready":
+/******/ 					setStatus("prepare");
+/******/ 					blockingPromises.push(promise);
+/******/ 					waitForBlockingPromises(function () {
+/******/ 						setStatus("ready");
+/******/ 					});
+/******/ 					return promise;
+/******/ 				case "prepare":
+/******/ 					blockingPromises.push(promise);
+/******/ 					return promise;
+/******/ 				default:
+/******/ 					return promise;
+/******/ 			}
+/******/ 		}
+/******/ 		
+/******/ 		function waitForBlockingPromises(fn) {
+/******/ 			if (blockingPromises.length === 0) return fn();
+/******/ 			var blocker = blockingPromises;
+/******/ 			blockingPromises = [];
+/******/ 			return Promise.all(blocker).then(function () {
+/******/ 				return waitForBlockingPromises(fn);
+/******/ 			});
+/******/ 		}
+/******/ 		
+/******/ 		function hotCheck(applyOnUpdate) {
+/******/ 			if (currentStatus !== "idle") {
+/******/ 				throw new Error("check() is only allowed in idle status");
+/******/ 			}
+/******/ 			setStatus("check");
+/******/ 			return __webpack_require__.hmrM().then(function (update) {
+/******/ 				if (!update) {
+/******/ 					setStatus(applyInvalidatedModules() ? "ready" : "idle");
+/******/ 					return null;
+/******/ 				}
+/******/ 		
+/******/ 				setStatus("prepare");
+/******/ 		
+/******/ 				var updatedModules = [];
+/******/ 				blockingPromises = [];
+/******/ 				currentUpdateApplyHandlers = [];
+/******/ 		
+/******/ 				return Promise.all(
+/******/ 					Object.keys(__webpack_require__.hmrC).reduce(function (
+/******/ 						promises,
+/******/ 						key
+/******/ 					) {
+/******/ 						__webpack_require__.hmrC[key](
+/******/ 							update.c,
+/******/ 							update.r,
+/******/ 							update.m,
+/******/ 							promises,
+/******/ 							currentUpdateApplyHandlers,
+/******/ 							updatedModules
+/******/ 						);
+/******/ 						return promises;
+/******/ 					},
+/******/ 					[])
+/******/ 				).then(function () {
+/******/ 					return waitForBlockingPromises(function () {
+/******/ 						if (applyOnUpdate) {
+/******/ 							return internalApply(applyOnUpdate);
+/******/ 						} else {
+/******/ 							setStatus("ready");
+/******/ 		
+/******/ 							return updatedModules;
+/******/ 						}
+/******/ 					});
+/******/ 				});
+/******/ 			});
+/******/ 		}
+/******/ 		
+/******/ 		function hotApply(options) {
+/******/ 			if (currentStatus !== "ready") {
+/******/ 				return Promise.resolve().then(function () {
+/******/ 					throw new Error("apply() is only allowed in ready status");
+/******/ 				});
+/******/ 			}
+/******/ 			return internalApply(options);
+/******/ 		}
+/******/ 		
+/******/ 		function internalApply(options) {
+/******/ 			options = options || {};
+/******/ 		
+/******/ 			applyInvalidatedModules();
+/******/ 		
+/******/ 			var results = currentUpdateApplyHandlers.map(function (handler) {
+/******/ 				return handler(options);
+/******/ 			});
+/******/ 			currentUpdateApplyHandlers = undefined;
+/******/ 		
+/******/ 			var errors = results
+/******/ 				.map(function (r) {
+/******/ 					return r.error;
+/******/ 				})
+/******/ 				.filter(Boolean);
+/******/ 		
+/******/ 			if (errors.length > 0) {
+/******/ 				setStatus("abort");
+/******/ 				return Promise.resolve().then(function () {
+/******/ 					throw errors[0];
+/******/ 				});
+/******/ 			}
+/******/ 		
+/******/ 			// Now in "dispose" phase
+/******/ 			setStatus("dispose");
+/******/ 		
+/******/ 			results.forEach(function (result) {
+/******/ 				if (result.dispose) result.dispose();
+/******/ 			});
+/******/ 		
+/******/ 			// Now in "apply" phase
+/******/ 			setStatus("apply");
+/******/ 		
+/******/ 			var error;
+/******/ 			var reportError = function (err) {
+/******/ 				if (!error) error = err;
+/******/ 			};
+/******/ 		
+/******/ 			var outdatedModules = [];
+/******/ 			results.forEach(function (result) {
+/******/ 				if (result.apply) {
+/******/ 					var modules = result.apply(reportError);
+/******/ 					if (modules) {
+/******/ 						for (var i = 0; i < modules.length; i++) {
+/******/ 							outdatedModules.push(modules[i]);
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 			});
+/******/ 		
+/******/ 			// handle errors in accept handlers and self accepted module load
+/******/ 			if (error) {
+/******/ 				setStatus("fail");
+/******/ 				return Promise.resolve().then(function () {
+/******/ 					throw error;
+/******/ 				});
+/******/ 			}
+/******/ 		
+/******/ 			if (queuedInvalidatedModules) {
+/******/ 				return internalApply(options).then(function (list) {
+/******/ 					outdatedModules.forEach(function (moduleId) {
+/******/ 						if (list.indexOf(moduleId) < 0) list.push(moduleId);
+/******/ 					});
+/******/ 					return list;
+/******/ 				});
+/******/ 			}
+/******/ 		
+/******/ 			setStatus("idle");
+/******/ 			return Promise.resolve(outdatedModules);
+/******/ 		}
+/******/ 		
+/******/ 		function applyInvalidatedModules() {
+/******/ 			if (queuedInvalidatedModules) {
+/******/ 				if (!currentUpdateApplyHandlers) currentUpdateApplyHandlers = [];
+/******/ 				Object.keys(__webpack_require__.hmrI).forEach(function (key) {
+/******/ 					queuedInvalidatedModules.forEach(function (moduleId) {
+/******/ 						__webpack_require__.hmrI[key](
+/******/ 							moduleId,
+/******/ 							currentUpdateApplyHandlers
+/******/ 						);
+/******/ 					});
+/******/ 				});
+/******/ 				queuedInvalidatedModules = undefined;
+/******/ 				return true;
+/******/ 			}
+/******/ 		}
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// Promise = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"app": 0
+/******/ 		};
+/******/ 		
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		var currentUpdatedModulesList;
+/******/ 		var waitingUpdateResolves = {};
+/******/ 		function loadUpdateChunk(chunkId) {
+/******/ 			return new Promise((resolve, reject) => {
+/******/ 				waitingUpdateResolves[chunkId] = resolve;
+/******/ 				// start update chunk loading
+/******/ 				var url = __webpack_require__.p + __webpack_require__.hu(chunkId);
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
+/******/ 				var loadingEnded = (event) => {
+/******/ 					if(waitingUpdateResolves[chunkId]) {
+/******/ 						waitingUpdateResolves[chunkId] = undefined
+/******/ 						var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 						var realSrc = event && event.target && event.target.src;
+/******/ 						error.message = 'Loading hot update chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 						error.name = 'ChunkLoadError';
+/******/ 						error.type = errorType;
+/******/ 						error.request = realSrc;
+/******/ 						reject(error);
+/******/ 					}
+/******/ 				};
+/******/ 				__webpack_require__.l(url, loadingEnded);
+/******/ 			});
+/******/ 		}
+/******/ 		
+/******/ 		self["webpackHotUpdatefood_festival"] = (chunkId, moreModules, runtime) => {
+/******/ 			for(var moduleId in moreModules) {
+/******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 					currentUpdate[moduleId] = moreModules[moduleId];
+/******/ 					if(currentUpdatedModulesList) currentUpdatedModulesList.push(moduleId);
+/******/ 				}
+/******/ 			}
+/******/ 			if(runtime) currentUpdateRuntime.push(runtime);
+/******/ 			if(waitingUpdateResolves[chunkId]) {
+/******/ 				waitingUpdateResolves[chunkId]();
+/******/ 				waitingUpdateResolves[chunkId] = undefined;
+/******/ 			}
+/******/ 		};
+/******/ 		
+/******/ 		var currentUpdateChunks;
+/******/ 		var currentUpdate;
+/******/ 		var currentUpdateRemovedChunks;
+/******/ 		var currentUpdateRuntime;
+/******/ 		function applyHandler(options) {
+/******/ 			if (__webpack_require__.f) delete __webpack_require__.f.jsonpHmr;
+/******/ 			currentUpdateChunks = undefined;
+/******/ 			function getAffectedModuleEffects(updateModuleId) {
+/******/ 				var outdatedModules = [updateModuleId];
+/******/ 				var outdatedDependencies = {};
+/******/ 		
+/******/ 				var queue = outdatedModules.map(function (id) {
+/******/ 					return {
+/******/ 						chain: [id],
+/******/ 						id: id
+/******/ 					};
+/******/ 				});
+/******/ 				while (queue.length > 0) {
+/******/ 					var queueItem = queue.pop();
+/******/ 					var moduleId = queueItem.id;
+/******/ 					var chain = queueItem.chain;
+/******/ 					var module = __webpack_require__.c[moduleId];
+/******/ 					if (
+/******/ 						!module ||
+/******/ 						(module.hot._selfAccepted && !module.hot._selfInvalidated)
+/******/ 					)
+/******/ 						continue;
+/******/ 					if (module.hot._selfDeclined) {
+/******/ 						return {
+/******/ 							type: "self-declined",
+/******/ 							chain: chain,
+/******/ 							moduleId: moduleId
+/******/ 						};
+/******/ 					}
+/******/ 					if (module.hot._main) {
+/******/ 						return {
+/******/ 							type: "unaccepted",
+/******/ 							chain: chain,
+/******/ 							moduleId: moduleId
+/******/ 						};
+/******/ 					}
+/******/ 					for (var i = 0; i < module.parents.length; i++) {
+/******/ 						var parentId = module.parents[i];
+/******/ 						var parent = __webpack_require__.c[parentId];
+/******/ 						if (!parent) continue;
+/******/ 						if (parent.hot._declinedDependencies[moduleId]) {
+/******/ 							return {
+/******/ 								type: "declined",
+/******/ 								chain: chain.concat([parentId]),
+/******/ 								moduleId: moduleId,
+/******/ 								parentId: parentId
+/******/ 							};
+/******/ 						}
+/******/ 						if (outdatedModules.indexOf(parentId) !== -1) continue;
+/******/ 						if (parent.hot._acceptedDependencies[moduleId]) {
+/******/ 							if (!outdatedDependencies[parentId])
+/******/ 								outdatedDependencies[parentId] = [];
+/******/ 							addAllToSet(outdatedDependencies[parentId], [moduleId]);
+/******/ 							continue;
+/******/ 						}
+/******/ 						delete outdatedDependencies[parentId];
+/******/ 						outdatedModules.push(parentId);
+/******/ 						queue.push({
+/******/ 							chain: chain.concat([parentId]),
+/******/ 							id: parentId
+/******/ 						});
+/******/ 					}
+/******/ 				}
+/******/ 		
+/******/ 				return {
+/******/ 					type: "accepted",
+/******/ 					moduleId: updateModuleId,
+/******/ 					outdatedModules: outdatedModules,
+/******/ 					outdatedDependencies: outdatedDependencies
+/******/ 				};
+/******/ 			}
+/******/ 		
+/******/ 			function addAllToSet(a, b) {
+/******/ 				for (var i = 0; i < b.length; i++) {
+/******/ 					var item = b[i];
+/******/ 					if (a.indexOf(item) === -1) a.push(item);
+/******/ 				}
+/******/ 			}
+/******/ 		
+/******/ 			// at begin all updates modules are outdated
+/******/ 			// the "outdated" status can propagate to parents if they don't accept the children
+/******/ 			var outdatedDependencies = {};
+/******/ 			var outdatedModules = [];
+/******/ 			var appliedUpdate = {};
+/******/ 		
+/******/ 			var warnUnexpectedRequire = function warnUnexpectedRequire(module) {
+/******/ 				console.warn(
+/******/ 					"[HMR] unexpected require(" + module.id + ") to disposed module"
+/******/ 				);
+/******/ 			};
+/******/ 		
+/******/ 			for (var moduleId in currentUpdate) {
+/******/ 				if (__webpack_require__.o(currentUpdate, moduleId)) {
+/******/ 					var newModuleFactory = currentUpdate[moduleId];
+/******/ 					/** @type {TODO} */
+/******/ 					var result;
+/******/ 					if (newModuleFactory) {
+/******/ 						result = getAffectedModuleEffects(moduleId);
+/******/ 					} else {
+/******/ 						result = {
+/******/ 							type: "disposed",
+/******/ 							moduleId: moduleId
+/******/ 						};
+/******/ 					}
+/******/ 					/** @type {Error|false} */
+/******/ 					var abortError = false;
+/******/ 					var doApply = false;
+/******/ 					var doDispose = false;
+/******/ 					var chainInfo = "";
+/******/ 					if (result.chain) {
+/******/ 						chainInfo = "\nUpdate propagation: " + result.chain.join(" -> ");
+/******/ 					}
+/******/ 					switch (result.type) {
+/******/ 						case "self-declined":
+/******/ 							if (options.onDeclined) options.onDeclined(result);
+/******/ 							if (!options.ignoreDeclined)
+/******/ 								abortError = new Error(
+/******/ 									"Aborted because of self decline: " +
+/******/ 										result.moduleId +
+/******/ 										chainInfo
+/******/ 								);
+/******/ 							break;
+/******/ 						case "declined":
+/******/ 							if (options.onDeclined) options.onDeclined(result);
+/******/ 							if (!options.ignoreDeclined)
+/******/ 								abortError = new Error(
+/******/ 									"Aborted because of declined dependency: " +
+/******/ 										result.moduleId +
+/******/ 										" in " +
+/******/ 										result.parentId +
+/******/ 										chainInfo
+/******/ 								);
+/******/ 							break;
+/******/ 						case "unaccepted":
+/******/ 							if (options.onUnaccepted) options.onUnaccepted(result);
+/******/ 							if (!options.ignoreUnaccepted)
+/******/ 								abortError = new Error(
+/******/ 									"Aborted because " + moduleId + " is not accepted" + chainInfo
+/******/ 								);
+/******/ 							break;
+/******/ 						case "accepted":
+/******/ 							if (options.onAccepted) options.onAccepted(result);
+/******/ 							doApply = true;
+/******/ 							break;
+/******/ 						case "disposed":
+/******/ 							if (options.onDisposed) options.onDisposed(result);
+/******/ 							doDispose = true;
+/******/ 							break;
+/******/ 						default:
+/******/ 							throw new Error("Unexception type " + result.type);
+/******/ 					}
+/******/ 					if (abortError) {
+/******/ 						return {
+/******/ 							error: abortError
+/******/ 						};
+/******/ 					}
+/******/ 					if (doApply) {
+/******/ 						appliedUpdate[moduleId] = newModuleFactory;
+/******/ 						addAllToSet(outdatedModules, result.outdatedModules);
+/******/ 						for (moduleId in result.outdatedDependencies) {
+/******/ 							if (__webpack_require__.o(result.outdatedDependencies, moduleId)) {
+/******/ 								if (!outdatedDependencies[moduleId])
+/******/ 									outdatedDependencies[moduleId] = [];
+/******/ 								addAllToSet(
+/******/ 									outdatedDependencies[moduleId],
+/******/ 									result.outdatedDependencies[moduleId]
+/******/ 								);
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 					if (doDispose) {
+/******/ 						addAllToSet(outdatedModules, [result.moduleId]);
+/******/ 						appliedUpdate[moduleId] = warnUnexpectedRequire;
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 			currentUpdate = undefined;
+/******/ 		
+/******/ 			// Store self accepted outdated modules to require them later by the module system
+/******/ 			var outdatedSelfAcceptedModules = [];
+/******/ 			for (var j = 0; j < outdatedModules.length; j++) {
+/******/ 				var outdatedModuleId = outdatedModules[j];
+/******/ 				if (
+/******/ 					__webpack_require__.c[outdatedModuleId] &&
+/******/ 					__webpack_require__.c[outdatedModuleId].hot._selfAccepted &&
+/******/ 					// removed self-accepted modules should not be required
+/******/ 					appliedUpdate[outdatedModuleId] !== warnUnexpectedRequire &&
+/******/ 					// when called invalidate self-accepting is not possible
+/******/ 					!__webpack_require__.c[outdatedModuleId].hot._selfInvalidated
+/******/ 				) {
+/******/ 					outdatedSelfAcceptedModules.push({
+/******/ 						module: outdatedModuleId,
+/******/ 						require: __webpack_require__.c[outdatedModuleId].hot._requireSelf,
+/******/ 						errorHandler: __webpack_require__.c[outdatedModuleId].hot._selfAccepted
+/******/ 					});
+/******/ 				}
+/******/ 			}
+/******/ 		
+/******/ 			var moduleOutdatedDependencies;
+/******/ 		
+/******/ 			return {
+/******/ 				dispose: function () {
+/******/ 					currentUpdateRemovedChunks.forEach(function (chunkId) {
+/******/ 						delete installedChunks[chunkId];
+/******/ 					});
+/******/ 					currentUpdateRemovedChunks = undefined;
+/******/ 		
+/******/ 					var idx;
+/******/ 					var queue = outdatedModules.slice();
+/******/ 					while (queue.length > 0) {
+/******/ 						var moduleId = queue.pop();
+/******/ 						var module = __webpack_require__.c[moduleId];
+/******/ 						if (!module) continue;
+/******/ 		
+/******/ 						var data = {};
+/******/ 		
+/******/ 						// Call dispose handlers
+/******/ 						var disposeHandlers = module.hot._disposeHandlers;
+/******/ 						for (j = 0; j < disposeHandlers.length; j++) {
+/******/ 							disposeHandlers[j].call(null, data);
+/******/ 						}
+/******/ 						__webpack_require__.hmrD[moduleId] = data;
+/******/ 		
+/******/ 						// disable module (this disables requires from this module)
+/******/ 						module.hot.active = false;
+/******/ 		
+/******/ 						// remove module from cache
+/******/ 						delete __webpack_require__.c[moduleId];
+/******/ 		
+/******/ 						// when disposing there is no need to call dispose handler
+/******/ 						delete outdatedDependencies[moduleId];
+/******/ 		
+/******/ 						// remove "parents" references from all children
+/******/ 						for (j = 0; j < module.children.length; j++) {
+/******/ 							var child = __webpack_require__.c[module.children[j]];
+/******/ 							if (!child) continue;
+/******/ 							idx = child.parents.indexOf(moduleId);
+/******/ 							if (idx >= 0) {
+/******/ 								child.parents.splice(idx, 1);
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 		
+/******/ 					// remove outdated dependency from module children
+/******/ 					var dependency;
+/******/ 					for (var outdatedModuleId in outdatedDependencies) {
+/******/ 						if (__webpack_require__.o(outdatedDependencies, outdatedModuleId)) {
+/******/ 							module = __webpack_require__.c[outdatedModuleId];
+/******/ 							if (module) {
+/******/ 								moduleOutdatedDependencies =
+/******/ 									outdatedDependencies[outdatedModuleId];
+/******/ 								for (j = 0; j < moduleOutdatedDependencies.length; j++) {
+/******/ 									dependency = moduleOutdatedDependencies[j];
+/******/ 									idx = module.children.indexOf(dependency);
+/******/ 									if (idx >= 0) module.children.splice(idx, 1);
+/******/ 								}
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 				},
+/******/ 				apply: function (reportError) {
+/******/ 					// insert new code
+/******/ 					for (var updateModuleId in appliedUpdate) {
+/******/ 						if (__webpack_require__.o(appliedUpdate, updateModuleId)) {
+/******/ 							__webpack_require__.m[updateModuleId] = appliedUpdate[updateModuleId];
+/******/ 						}
+/******/ 					}
+/******/ 		
+/******/ 					// run new runtime modules
+/******/ 					for (var i = 0; i < currentUpdateRuntime.length; i++) {
+/******/ 						currentUpdateRuntime[i](__webpack_require__);
+/******/ 					}
+/******/ 		
+/******/ 					// call accept handlers
+/******/ 					for (var outdatedModuleId in outdatedDependencies) {
+/******/ 						if (__webpack_require__.o(outdatedDependencies, outdatedModuleId)) {
+/******/ 							var module = __webpack_require__.c[outdatedModuleId];
+/******/ 							if (module) {
+/******/ 								moduleOutdatedDependencies =
+/******/ 									outdatedDependencies[outdatedModuleId];
+/******/ 								var callbacks = [];
+/******/ 								var dependenciesForCallbacks = [];
+/******/ 								for (var j = 0; j < moduleOutdatedDependencies.length; j++) {
+/******/ 									var dependency = moduleOutdatedDependencies[j];
+/******/ 									var acceptCallback =
+/******/ 										module.hot._acceptedDependencies[dependency];
+/******/ 									if (acceptCallback) {
+/******/ 										if (callbacks.indexOf(acceptCallback) !== -1) continue;
+/******/ 										callbacks.push(acceptCallback);
+/******/ 										dependenciesForCallbacks.push(dependency);
+/******/ 									}
+/******/ 								}
+/******/ 								for (var k = 0; k < callbacks.length; k++) {
+/******/ 									try {
+/******/ 										callbacks[k].call(null, moduleOutdatedDependencies);
+/******/ 									} catch (err) {
+/******/ 										if (options.onErrored) {
+/******/ 											options.onErrored({
+/******/ 												type: "accept-errored",
+/******/ 												moduleId: outdatedModuleId,
+/******/ 												dependencyId: dependenciesForCallbacks[k],
+/******/ 												error: err
+/******/ 											});
+/******/ 										}
+/******/ 										if (!options.ignoreErrored) {
+/******/ 											reportError(err);
+/******/ 										}
+/******/ 									}
+/******/ 								}
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 		
+/******/ 					// Load self accepted modules
+/******/ 					for (var o = 0; o < outdatedSelfAcceptedModules.length; o++) {
+/******/ 						var item = outdatedSelfAcceptedModules[o];
+/******/ 						var moduleId = item.module;
+/******/ 						try {
+/******/ 							item.require(moduleId);
+/******/ 						} catch (err) {
+/******/ 							if (typeof item.errorHandler === "function") {
+/******/ 								try {
+/******/ 									item.errorHandler(err);
+/******/ 								} catch (err2) {
+/******/ 									if (options.onErrored) {
+/******/ 										options.onErrored({
+/******/ 											type: "self-accept-error-handler-errored",
+/******/ 											moduleId: moduleId,
+/******/ 											error: err2,
+/******/ 											originalError: err
+/******/ 										});
+/******/ 									}
+/******/ 									if (!options.ignoreErrored) {
+/******/ 										reportError(err2);
+/******/ 									}
+/******/ 									reportError(err);
+/******/ 								}
+/******/ 							} else {
+/******/ 								if (options.onErrored) {
+/******/ 									options.onErrored({
+/******/ 										type: "self-accept-errored",
+/******/ 										moduleId: moduleId,
+/******/ 										error: err
+/******/ 									});
+/******/ 								}
+/******/ 								if (!options.ignoreErrored) {
+/******/ 									reportError(err);
+/******/ 								}
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 		
+/******/ 					return outdatedModules;
+/******/ 				}
+/******/ 			};
+/******/ 		}
+/******/ 		__webpack_require__.hmrI.jsonp = function (moduleId, applyHandlers) {
+/******/ 			if (!currentUpdate) {
+/******/ 				currentUpdate = {};
+/******/ 				currentUpdateRuntime = [];
+/******/ 				currentUpdateRemovedChunks = [];
+/******/ 				applyHandlers.push(applyHandler);
+/******/ 			}
+/******/ 			if (!__webpack_require__.o(currentUpdate, moduleId)) {
+/******/ 				currentUpdate[moduleId] = __webpack_require__.m[moduleId];
+/******/ 			}
+/******/ 		};
+/******/ 		__webpack_require__.hmrC.jsonp = function (
+/******/ 			chunkIds,
+/******/ 			removedChunks,
+/******/ 			removedModules,
+/******/ 			promises,
+/******/ 			applyHandlers,
+/******/ 			updatedModulesList
+/******/ 		) {
+/******/ 			applyHandlers.push(applyHandler);
+/******/ 			currentUpdateChunks = {};
+/******/ 			currentUpdateRemovedChunks = removedChunks;
+/******/ 			currentUpdate = removedModules.reduce(function (obj, key) {
+/******/ 				obj[key] = false;
+/******/ 				return obj;
+/******/ 			}, {});
+/******/ 			currentUpdateRuntime = [];
+/******/ 			chunkIds.forEach(function (chunkId) {
+/******/ 				if (
+/******/ 					__webpack_require__.o(installedChunks, chunkId) &&
+/******/ 					installedChunks[chunkId] !== undefined
+/******/ 				) {
+/******/ 					promises.push(loadUpdateChunk(chunkId, updatedModulesList));
+/******/ 					currentUpdateChunks[chunkId] = true;
+/******/ 				}
+/******/ 			});
+/******/ 			if (__webpack_require__.f) {
+/******/ 				__webpack_require__.f.jsonpHmr = function (chunkId, promises) {
+/******/ 					if (
+/******/ 						currentUpdateChunks &&
+/******/ 						!__webpack_require__.o(currentUpdateChunks, chunkId) &&
+/******/ 						__webpack_require__.o(installedChunks, chunkId) &&
+/******/ 						installedChunks[chunkId] !== undefined
+/******/ 					) {
+/******/ 						promises.push(loadUpdateChunk(chunkId));
+/******/ 						currentUpdateChunks[chunkId] = true;
+/******/ 					}
+/******/ 				};
+/******/ 			}
+/******/ 		};
+/******/ 		
+/******/ 		__webpack_require__.hmrM = () => {
+/******/ 			if (typeof fetch === "undefined") throw new Error("No browser support: need fetch API");
+/******/ 			return fetch(__webpack_require__.p + __webpack_require__.hmrF()).then((response) => {
+/******/ 				if(response.status === 404) return; // no update available
+/******/ 				if(!response.ok) throw new Error("Failed to fetch update manifest " + response.statusText);
+/******/ 				return response.json();
+/******/ 			});
+/******/ 		};
+/******/ 		
+/******/ 		// no deferred startup
+/******/ 		
+/******/ 		// no jsonp function
+/******/ 	})();
+/******/ 	
 /************************************************************************/
-(() => {
-/*!*****************************!*
-  !*** ./assets/js/script.js ***!
-  \*****************************/
-eval("/* provided dependency */ var $ = __webpack_require__(/*! jquery */ \"./node_modules/jquery/dist/jquery.js\");\n__webpack_require__(/*! bootstrap */ \"./node_modules/bootstrap/dist/js/bootstrap.js\");\nconst img1 = __webpack_require__(/*! ../../assets/img/food-table.jpg */ \"./assets/img/food-table.jpg\");\nconst img2 = __webpack_require__(/*! ../../assets/img/grill.jpg */ \"./assets/img/grill.jpg\");\n\n$(document).ready(function() {\n  // First image is hard coded in index.html\n  const carouselSlides = [\n    {\n      title: \"We travel all over the US\",\n      subtitle: \"Check out our schedule!\",\n      img: img1,\n      btnText: \"View Schedule\",\n      btnUrl: \"schedule.html\"\n    },\n    {\n      title: \"Our food is seriously the bomb!\",\n      subtitle: \"What are you waiting for?\",\n      img: img2,\n      btnText: \"Purchase Tickets\",\n      btnUrl: \"tickets.html\"\n    },\n  ]\n\n  carouselSlides.forEach((slide, i) => {\n    $('.carousel-inner').append(`\n  <div class=\"carousel-item fullscreen-carousel\" style=\"background-image: url('${slide.img}')\">\n    <div class=\"d-flex h-100 align-items-center justify-content-center carousel-caption\">\n        <div class=\"container\">\n          <div class=\"row align-items-center justify-content-center\">\n              <h2 class=\"display-4 mb-2\">${slide.title}</h2>\n          </div>\n          <div class=\"row align-items-center justify-content-center\"> \n            <h3>${slide.subtitle}</h3>\n          </div>\n          <div class=\" mt-4 row align-items-center justify-content-center\"> \n            <a class=\"btn btn-primary\" href=\"${slide.btnUrl}\">\n                ${slide.btnText}\n            </a>\n          </div>\n        </div>\n    </div>\n  </div>`)\n  })\n});\n\n//# sourceURL=webpack://food-festival/./assets/js/script.js?");
-})();
-
+/******/ 	// module cache are used so entry inlining is disabled
+/******/ 	// startup
+/******/ 	// Load entry module
+/******/ 	__webpack_require__("./assets/js/script.js");
+/******/ 	__webpack_require__("./node_modules/webpack-plugin-serve/client.js");
 /******/ })()
 ;
